@@ -50,7 +50,7 @@
             Docentes
           </v-card-text> 
           <v-col class="px-0">
-            <v-btn class="ma-2" outlined color="indigo" to="/VerCursos">Ver docentes</v-btn>
+            <v-btn class="ma-2" outlined color="indigo" to="/VerDocentes">Ver docentes</v-btn>
           </v-col>
           </v-row>
           </v-col>
