@@ -1,7 +1,15 @@
 <template>
-  <v-parallax height="1080" width="1920" src="../assets/FondoIndex.jpg">
-    <h1 class="text-center">Bienvenido</h1>
-    <h4 class="subheading" align="center">¡Revisa los cursos que tenemos para ti!</h4>
+  <v-parallax height="1080" width="1280" src="../assets/FondoIndex.jpg">
+    <h1 class="text-center" align="start">Bienvenido</h1>
+    <h2 class="text-center" align="start">¡Revisa los cursos que tenemos para ti!</h2>
+  <v-carousel>
+    <v-carousel-item
+      v-for="(item,i) in items"
+      :key="i"
+      :src="item.src"
+    ></v-carousel-item>
+  </v-carousel>
+<v-spacer></v-spacer>
     <v-card class="d-inline-block mx-auto">
       <v-container>
         <v-row justify="space-between">
@@ -57,5 +65,30 @@
         </v-row>
       </v-container>
     </v-card>
-  </v-parallax> 
+    <v-spacer></v-spacer>
+  </v-parallax>
 </template>
+
+<script>
+  export default {
+    data () {
+      return {
+        items: [
+          {
+            src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
+          },
+          {
+            src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
+          },
+          {
+            src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg',
+          },
+          {
+            src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg',
+          },
+        ],
+      }
+    },
+  }
+</script>
+
