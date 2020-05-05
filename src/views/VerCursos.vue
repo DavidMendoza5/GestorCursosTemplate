@@ -2,7 +2,7 @@
   <v-parallax
     dark
     src="../assets/FondoPaisaje.jpg"
-    height="1080" width="1920"
+    height="1080" width="1980"
   >
     <v-row
       align="center"
@@ -19,8 +19,9 @@
         <div v-for="(curso, index) in cursos" :key="index">
           <v-list-item v-for="(curso2, index2) in curso" :key="index2" link>
             <v-list-item-content v-if="curso2._id != null">
-          <v-list-item-title>id: {{ curso2._id }}</v-list-item-title>
-          <v-list-item-subtitle>nombre: {{ curso2.nombre }}</v-list-item-subtitle>
+          <v-list-item-title>Nombre: {{ curso2.nombre}}</v-list-item-title>
+          <v-list-item-subtitle>Id: {{ curso2._id  }}</v-list-item-subtitle>
+          <v-list-item-subtitle>Docente: {{ curso2.docente  }}</v-list-item-subtitle>
         </v-list-item-content>
       <v-list-item-action>
         <v-btn icon>
