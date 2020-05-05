@@ -18,8 +18,8 @@
       <v-subheader inset>Docentes</v-subheader>
           <v-list-item v-for="(docente, index) in docentes" :key="index" link>
             <v-list-item-content>
-          <v-list-item-title>id: {{ docente._id }}</v-list-item-title>
-          <v-list-item-subtitle>nombre: {{ docente.nombre }}</v-list-item-subtitle>
+          <v-list-item-title>Nombre: {{ docente.nombre}}</v-list-item-title>
+          <v-list-item-subtitle>Id: {{ docente._id  }}</v-list-item-subtitle>
         </v-list-item-content>
       <v-list-item-action>
         <v-btn icon>
