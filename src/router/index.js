@@ -28,6 +28,11 @@ Vue.use(VueRouter)
     path: '/VerCursos',
     name: 'VerCursos',
     component: () => import('../views/VerCursos.vue')
+  },
+  {
+    path: '/VerDocentes',
+    name: 'VerDocentes',
+    component: () => import('../views/VerDocentes.vue')
   }
 ]
 
