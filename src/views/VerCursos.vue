@@ -2,6 +2,7 @@
   <v-parallax
     dark
     src="../assets/FondoPaisaje.jpg"
+    height="1080" width="1920"
   >
     <v-row
       align="center"
@@ -11,68 +12,45 @@
         <h1 class="subheading">¿Encontró el curso que quiere?</h1>
       </v-col>
     </v-row>
-
-  <v-card
-    class="mx-auto"
-    max-width="344"
-  >
-    <v-card-text>
-      <p class="display-1 text--primary">
-        Cursos
-      </p>
-      <div class="text--primary">
-        En este apartado usted verá los cursos que tenemos
-      </div>
-    </v-card-text>
-    <v-card-actions>
-      <v-btn
-        text
-        color="deep-purple accent-4"
-      >
-        Ver cursos
-      </v-btn>
-    </v-card-actions>
-  </v-card>
-<v-divider inset></v-divider>
-  <v-row>
-    <v-col cols="12" sm="6" offset-sm="3">
-      <v-card>
-  <v-subheader inset>Folders</v-subheader>
-    <v-list-item v-for="item in items" :key="item.title" link>
-      <v-list-item-avatar>
-        <v-icon :class="[item.iconClass]">{{ item.icon }}</v-icon>
-      </v-list-item-avatar>
-      <v-list-item-content>
-      <v-list-item-title>{{ item.title }}</v-list-item-title>
-      <v-list-item-subtitle>{{ item.subtitle }}</v-list-item-subtitle>
-      </v-list-item-content>
+<v-row>
+  <v-col cols="12" sm="6" offset-sm="3">
+    <v-card>
+      <v-subheader inset>Cursos</v-subheader>
+        <div v-for="(curso, index) in cursos" :key="index">
+          <v-list-item v-for="(curso2, index2) in curso" :key="index2" link>
+            <v-list-item-content v-if="curso2._id != null">
+          <v-list-item-title>id: {{ curso2._id }}</v-list-item-title>
+          <v-list-item-subtitle>nombre: {{ curso2.nombre }}</v-list-item-subtitle>
+        </v-list-item-content>
       <v-list-item-action>
         <v-btn icon>
           <v-icon color="grey lighten-1">mdi-information</v-icon>
         </v-btn>
       </v-list-item-action>
       </v-list-item>
+      </div>
     </v-card>
   </v-col>
 </v-row>
-  </v-parallax>
+</v-parallax>
 </template>
 
 <script>
+import CursoService from '../services/cursos.service';
+
   export default {
     data () {
       return {
         dialog: false,
-        items: [
-          { icon: 'folder', iconClass: 'grey lighten-1 white--text', title: 'Photos', subtitle: 'Jan 9, 2014' },
-          { icon: 'folder', iconClass: 'grey lighten-1 white--text', title: 'Recipes', subtitle: 'Jan 17, 2014' },
-          { icon: 'folder', iconClass: 'grey lighten-1 white--text', title: 'Work', subtitle: 'Jan 28, 2014' },
-        ],
-        items2: [
-          { icon: 'assignment', iconClass: 'blue white--text', title: 'Vacation itinerary', subtitle: 'Jan 20, 2014' },
-          { icon: 'call_to_action', iconClass: 'amber white--text', title: 'Kitchen remodel', subtitle: 'Jan 10, 2014' },
-        ],
+        cursos: [],
+        cursos2: []
       }
     },
+    mounted() {
+      CursoService.getCursos().then(Response => {
+        console.log(Response.data)
+        this.cursos = Response.data;
+      })
+    }
   }
 </script>
