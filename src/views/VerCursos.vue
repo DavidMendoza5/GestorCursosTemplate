@@ -1,15 +1,18 @@
 <template>
   <v-parallax
     dark
-    src="../assets/FondoPaisaje.jpg"
-    height="1080" width="1980"
+    src="../assets/VerCursos.png"
+    height="1000" width="1980"
   >
     <v-row
       align="center"
       justify="center"
     >
       <v-col class="text-center" cols="12">
+        <v-card width="930" class="mx-auto mt-5">
         <h1 class="subheading">¿Encontró el curso que quiere?</h1>
+        <h2 class="black--text">Consulta los cursos que tenemos disponibles actualmente</h2>
+        </v-card>
       </v-col>
     </v-row>
 <v-row>
