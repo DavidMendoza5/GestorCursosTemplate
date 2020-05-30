@@ -2,8 +2,9 @@
   <v-app>
     <v-app-bar dense dark app>
       <v-btn rounded to="/">Inicio</v-btn>
-      <v-btn rounded to="/LogIn">Log In</v-btn>
-      <v-btn rounded to="/SignUp">Sign Up</v-btn>
+      <v-btn rounded to="/LogIn" v-if="!currentUser">Log In</v-btn>
+      <v-btn rounded to="/SignUp" v-if="!currentUser">Sign Up</v-btn>
+      <v-btn rounded to="/" v-if="currentUser">Mis cursos</v-btn>
        <v-spacer></v-spacer>
         <v-btn icon>
         <v-icon>mdi-magnify</v-icon>
@@ -87,6 +88,17 @@
         'mdi-facebook'
       ],
     }),
+    computed:{
+      currentUser() {
+      return this.$store.state.auth.user;
+      },
+    },
+    methods:{
+      logOut() {
+        this.$store.dispatch('auth/logout');
+        this.$router.push('/LogIn');
+      }
+    }
   }
 </script>
 
@@ -104,4 +116,4 @@
     },
   }
 </script>
--->
+--!>
