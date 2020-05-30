@@ -1,15 +1,18 @@
 <template>
   <v-parallax
     dark
-    src="../assets/FondoPaisaje.jpg"
-    height="1080" width="1920"
+    src="../assets/Docentes.jpg"
+    height="700" width="1980"
   >
     <v-row
       align="center"
       justify="center"
     >
       <v-col class="text-center" cols="12">
+        <v-card width="930" class="mx-auto mt-5">
         <h1 class="subheading">Estos son los docentes</h1>
+        <h2>Consulta los docentes que se encuentran con nosotros</h2>
+        </v-card>
       </v-col>
     </v-row>
 <v-row>
