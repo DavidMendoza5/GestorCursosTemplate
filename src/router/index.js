@@ -33,6 +33,11 @@ Vue.use(VueRouter)
     path: '/VerDocentes',
     name: 'VerDocentes',
     component: () => import('../views/VerDocentes.vue')
+  },
+  {
+    path: '/Profile',
+    name: 'Profile',
+    component: () => import('../views/Profile.vue')
   }
 ]
 
