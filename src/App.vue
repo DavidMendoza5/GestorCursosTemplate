@@ -22,24 +22,56 @@
       tile
     >
       <v-card-title class="teal">
-        <strong class="subheading">¡Contáctanos!</strong>
-
+        <v-layout>
+          <v-flex md-3>
+            <v-container>
+              <h4>Sobre nosotros</h4>
+              <a href="#" class="secondary--text font-weight-light">¡Contáctanos!</a>
+            </v-container>
+          </v-flex>
+          <v-flex md-3>
+            <v-container>
+              <a href="#" class="secondary--text font-weight-light">¿Quiénes somos?</a>
+              <v-flex>
+                <a href="#" class="secondary--text font-weight-light">Empleo</a>
+              </v-flex>
+            </v-container>
+          </v-flex>
+          <v-flex md-3>
+            <v-container>
+              <a href="#" class="secondary--text font-weight-light">Mapa del sitio</a>
+              <v-flex>
+                <a href="#" class="secondary--text font-weight-light">Cursos destacados</a>
+              </v-flex>
+            </v-container>
+          </v-flex>
+          <v-flex md-3>
+            <v-container>
+              <a href="#" class="secondary--text font-weight-light">Politicas de Privacidad</a>
+            </v-container>
+          </v-flex>
+        </v-layout>
+      
         <v-spacer></v-spacer>
-
-        <v-btn
-          v-for="icon in icons"
-          :key="icon"
-          class="mx-4"
-          dark
-          icon
-          href="https://www.facebook.com/angeljesus.canpech"
-        >
-          <v-icon size="24px">{{ icon }}</v-icon>
-        </v-btn>
+        <v-layout>
+          <v-flex md-3>
+            <h4>Aprende en nuestras redes:</h4>
+            <v-btn
+              v-for="icon in icons"
+              :key="icon"
+              class="mx-4"
+              dark
+              icon
+              href="https://www.facebook.com/angeljesus.canpech"
+            >
+              <v-icon size="24px">{{ icon }}</v-icon>
+            </v-btn>          
+          </v-flex>
+        </v-layout>
       </v-card-title>
 
-      <v-card-text class="py-2 white--text text-center">
-        {{ new Date().getFullYear() }} — <strong>HuasTechnologies</strong>
+      <v-card-text class="py-2 white--text text-center font-weight-light">
+        {{ new Date().getFullYear() }} — <strong class="body-1 font-weight-light">Derechos de autor @HuasTechnology, Inc.</strong>
       </v-card-text>
     </v-card>
   </v-footer>
