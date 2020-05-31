@@ -5,7 +5,7 @@
         <h1 class="display-1">Login</h1>
       </v-card-title>
       <v-card-text>
-        <v-form>
+        <v-form name="form" @submit.prevent="handleLogin">
           <v-text-field 
           prepend-icon="mdi-account-circle"
           label="Email"/>
@@ -15,13 +15,13 @@
           label="Password"
           :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
           @click:append="showPassword = !showPassword"/>
+          <v-divider></v-divider>
+          <v-card-actions>
+            <v-btn color="info" class="mx-2" to="/SignUp">Register</v-btn>
+            <v-btn color="success" type="submit">Login</v-btn>
+          </v-card-actions>
         </v-form>
       </v-card-text>
-      <v-divider></v-divider>
-      <v-card-actions>
-        <v-btn color="info" class="mx-2" to="/SignUp">Register</v-btn>
-        <v-btn color="success">Login</v-btn>
-      </v-card-actions>
     </v-card>
   </v-app>
 </template>
