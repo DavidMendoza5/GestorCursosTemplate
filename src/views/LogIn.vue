@@ -8,9 +8,13 @@
         <v-form name="form" @submit.prevent="handleLogin">
           <v-text-field 
           prepend-icon="mdi-account-circle"
+          v-model="user.correo"
+          name="correo"
           label="Email"/>
           <v-text-field 
           prepend-icon="mdi-lock"
+          v-model="user.password"
+          name="password"
           :type="showPassword ? 'text' : 'password'"
           label="Password"
           :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
@@ -27,11 +31,12 @@
 </template>
 
 <script>
-import User from '../models/user';
+//import User from '../models/user';
 export default {
   name:'LogIn',
   data: () => ({
-    user: new User('', ''),
+    //user: new User('', ''),
+    user: {correo: "", password: ""},
     showPassword: false
   }),
   computed:{
