@@ -12,17 +12,17 @@ const initialState = user
         login({ commit }, user) {
             return AuthService.login(user).then(
                 user => {
-                    commit('login success', user);
+                    commit('loginSuccess', user);
                     return Promise.resolve(user);
                 },
                 error => {
-                    commit('login failure');
+                    commit('loginFailure');
                     return Promise.reject(error); 
                 }
             );
         },
         logout({ commit }) {
-            AuthService.logut();
+            AuthService.logout();
             commit('logout');
         }
         //Faltan los registros
