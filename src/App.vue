@@ -5,6 +5,8 @@
       <v-btn rounded to="/LogIn" v-if="!currentUser">Log In</v-btn>
       <v-btn rounded to="/SignUp" v-if="!currentUser">Sign Up</v-btn>
       <v-btn rounded to="/" v-if="currentUser">Mis cursos</v-btn>
+      <v-btn rounded to="/Profile" v-if="currentUser">Perfil</v-btn>
+      <v-btn rounded v-if="currentUser" @click.prevent="logOut">Cerrar sesión</v-btn>
        <v-spacer></v-spacer>
         <v-btn icon>
         <v-icon>mdi-magnify</v-icon>
