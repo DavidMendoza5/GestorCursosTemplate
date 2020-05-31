@@ -1,6 +1,8 @@
 <template>
     <v-card>
-        <v-card-title>Email: {currentUser.correo}</v-card-title>      
+        <v-card-title>Email: {{currentUser.correo}}</v-card-title>
+        <v-card-title>Nombre: {{currentUser.nombre}}</v-card-title>    
+        <v-card-title>Id: {{currentUser.id}}</v-card-title>      
     </v-card>
 </template>
 
