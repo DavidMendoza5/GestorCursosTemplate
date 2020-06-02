@@ -27,6 +27,11 @@
         </v-form>
       </v-card-text>
     </v-card>
+    <v-snackbar v-model="snackbar" :class="successful ? 'alert-success' : 'alert-danger'">
+      <!--{{ message.message }}--> Las credenciales no coinciden
+      <v-btn color="blue" text @click="snackbar=false">cerrar</v-btn>
+    </v-snackbar>
+
   </v-app>
 </template>
 
@@ -37,7 +42,9 @@ export default {
   data: () => ({
     //user: new User('', ''),
     user: {correo: "", password: ""},
-    showPassword: false
+    showPassword: false,
+        snackbar: false,
+        message:''
   }),
   computed:{
     loggedIn(){
@@ -55,7 +62,12 @@ export default {
       this.$validator.validateAll().then(isValid => {
         if (!isValid) {
           this.loading = false;
+          this.snackbar = true;
           return;
+        }
+        if(!this.user.correo || !this.user.password) {
+          this.snackbar = true;
+          this.message = 'error';
         }
         if(this.user.correo && this.user.password){
           this.$store.dispatch('auth/login', this.user).then(
@@ -63,9 +75,9 @@ export default {
                 this.$router.push('/Profile');
               },
               error => {
-                //this.snackbar = true
+                this.snackbar = true;
                 this.message = 
-                (error.response && error.rsponse.data) ||
+                (error.response && error.response.data) ||
                 error.message ||
                 error.toString();
               }
