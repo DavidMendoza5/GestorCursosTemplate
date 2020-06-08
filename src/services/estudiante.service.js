@@ -11,7 +11,7 @@ class EstudianteService {
                 cargo: estudiante.cargo,
                 telefono: estudiante.telefono,
                 conocimientos_previos: estudiante.conocimientos_previos,
-                _id: estudiante.id,
+                //_id: estudiante.id,
                 curso: estudiante.curso
             }) //post Estudiante
     }
