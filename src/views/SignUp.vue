@@ -65,13 +65,15 @@
       label="ID_Curso"
     ></v-text-field>
 
-    <v-text-field
+    <!--
+       <v-text-field
       prepend-icon="mdi-checkbox-marked-circle"
       v-model="estudiante.id"
       label="ID_Estudiante"
       required
     ></v-text-field>
-
+    -->
+  
     <div class="ma-3">
       <v-btn
       :disabled="!valid"
@@ -113,7 +115,7 @@
       passRules: [
         v => !!v || 'Password is required',
       ],
-      estudiante: { nombre:'', correo:'', password:'', cargo:'', telefono:'', conocimientos_previos:'', id:'',curso:''} //
+      estudiante: { nombre:'', correo:'', password:'', cargo:'', telefono:'', conocimientos_previos:'',curso:''} //
     }),
     methods: {
       validate () {
