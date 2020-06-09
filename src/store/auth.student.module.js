@@ -9,9 +9,7 @@ export const authEs = {
     actions: {
 
         register({ commit }, estudiante) {
-            //console.log(estudiante);
             return registroEstudiante.postEstudiante(estudiante).then(
-                //console.log(estudiante),
                 estudiante => {
                     console.log(estudiante);
                     commit('registerSuccess', estudiante);
