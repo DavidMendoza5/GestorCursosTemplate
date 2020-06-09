@@ -1,6 +1,10 @@
 import axios from 'axios';
 const url = 'http://localhost:3800/api/';
 
+var config = {
+        header: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    } //Configuración del Header-signup Estudiante
+
 class EstudianteService {
     postEstudiante(estudiante) {
         console.log(estudiante);
@@ -11,9 +15,8 @@ class EstudianteService {
                 cargo: estudiante.cargo,
                 telefono: estudiante.telefono,
                 conocimientos_previos: estudiante.conocimientos_previos,
-                //_id: estudiante.id,
                 curso: estudiante.curso
-            }) //post Estudiante
+            }, config) //post Estudiante
     }
 }
 
