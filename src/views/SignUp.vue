@@ -64,15 +64,6 @@
       v-model="estudiante.curso"
       label="ID_Curso"
     ></v-text-field>
-
-    <!--
-       <v-text-field
-      prepend-icon="mdi-checkbox-marked-circle"
-      v-model="estudiante.id"
-      label="ID_Estudiante"
-      required
-    ></v-text-field>
-    -->
   
     <div class="ma-3">
       <v-btn
@@ -125,8 +116,6 @@
         this.$refs.form.reset()
       },
       postEstudiante() {
-        console.log(this.estudiante.nombre);
-        console.log(this.estudiante.correo);
         this.$store.dispatch('authEs/register', this.estudiante).then(
             data => {
               this.successful = true;
