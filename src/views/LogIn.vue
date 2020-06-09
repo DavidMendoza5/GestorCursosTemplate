@@ -27,7 +27,7 @@
         </v-form>
       </v-card-text>
     </v-card>
-    <v-snackbar v-model="snackbar" :class="successful ? 'alert-success' : 'alert-danger'">
+    <v-snackbar v-model="snackbar">
       <!--{{ message.message }}--> Las credenciales no coinciden
       <v-btn color="blue" text @click="snackbar=false">cerrar</v-btn>
     </v-snackbar>

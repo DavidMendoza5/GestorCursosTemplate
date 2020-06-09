@@ -8,6 +8,7 @@ const initialState = user
   export const auth = {
     namespaced: true,
     state: initialState,
+    //token: user.token || '',
     actions: {
         login({ commit }, user) {
             return AuthService.login(user).then(
@@ -24,8 +25,22 @@ const initialState = user
         logout({ commit }) {
             AuthService.logout();
             commit('logout');
+        },
+        register({ commit }, user) {
+            return AuthService.register(user).then(
+                user => {
+                    console.log(user)
+                    commit('registerSuccess', user);
+                    return Promise.resolve(user);
+                },
+                error => {
+                    commit('registerFailure');
+                    return Promise.reject(error);
+                }
+            ).catch(error => {
+                console.log(error);
+            })
         }
-        //Faltan los registros
     },
     mutations: {
         loginSuccess(state, user) {
@@ -39,6 +54,12 @@ const initialState = user
         logout(state) {
             state.status.loggedIn = false;
             state.user = null;
+        },
+        registerSuccess(state) {
+            state.status.loggedIn = false; 
+        },
+        registerFailure(state) {
+            state.status.loggedIn = false;
         }
     }
   }
