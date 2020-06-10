@@ -38,6 +38,11 @@ Vue.use(VueRouter)
     path: '/Profile',
     name: 'Profile',
     component: () => import('../views/Profile.vue')
+  },
+  {
+    path: '/MisCursos',
+    name: 'MisCursos',
+    component: () => import('../views/MisCursos.vue')
   }
 ]
 
