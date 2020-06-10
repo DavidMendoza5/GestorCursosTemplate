@@ -2,7 +2,7 @@
   <v-app>
     <v-card width="400" class="mx-auto mt-5">
       <v-card-title>
-        <h1 class="display-1">Login</h1>
+        <h1 class="display-1">Login estudiantes</h1>
       </v-card-title>
       <v-card-text>
         <v-form name="form" @submit.prevent="handleLogin">
@@ -36,11 +36,9 @@
 </template>
 
 <script>
-//import User from '../models/user';
 export default {
-  name:'LogIn',
+  name:'LogInEst',
   data: () => ({
-    //user: new User('', ''),
     user: {correo: "", password: ""},
     showPassword: false,
         snackbar: false,
@@ -48,12 +46,12 @@ export default {
   }),
   computed:{
     loggedIn(){
-      return this.$store.state.auth.status.loggedIn;
+      return this.$store.state.authEs.status.loggedIn;
     }
   },
   created(){
     if(this.loggedIn){
-      this.$router.push('/Profile');
+      this.$router.push('/ProfileEst');
     }
   },
   methods:{
@@ -70,9 +68,9 @@ export default {
           this.message = 'error';
         }
         if(this.user.correo && this.user.password){
-          this.$store.dispatch('auth/login', this.user).then(
+          this.$store.dispatch('authEs/login', this.user).then(
               () => {
-                this.$router.push('/Profile');
+                this.$router.push('/ProfileEst');
               },
               error => {
                 this.snackbar = true;

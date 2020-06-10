@@ -2,11 +2,15 @@
   <v-app>
     <v-app-bar dense dark app>
       <v-btn rounded to="/">Inicio</v-btn>
-      <v-btn rounded to="/LogIn" v-if="!currentUser">Log In</v-btn>
-      <v-btn rounded to="/SignUp" v-if="!currentUser">Sign Up</v-btn>
-      <v-btn rounded to="/MisCursos" v-if="currentUser">Mis cursos</v-btn>
+      <v-btn rounded to="/LogIn" v-if="!currentUser && !currentUserEst">Login maestros</v-btn>
+      <v-btn rounded to="/LogInEst" v-if="!currentUser && !currentUserEst">Login estudiantes</v-btn>
+      <v-btn rounded to="/SignUp" v-if="!currentUser && !currentUserEst">Sign Up</v-btn>
+      <v-btn rounded to="/" v-if="currentUser">Mis cursos</v-btn>
       <v-btn rounded to="/Profile" v-if="currentUser">Perfil</v-btn>
+      <v-btn rounded to="/ProfileEst" v-if="currentUserEst">Perfil</v-btn>
+      <v-btn rounded to="/CrearDocente" v-if="currentUser && currentUser.rol == 'ADMIN_ROLE'">Crear docente</v-btn>
       <v-btn rounded v-if="currentUser" @click.prevent="logOut">Cerrar sesión</v-btn>
+      <v-btn rounded v-if="currentUserEst" @click.prevent="logOutEst">Cerrar sesión</v-btn>
        <v-spacer></v-spacer>
         <v-btn icon>
         <v-icon>mdi-magnify</v-icon>
@@ -94,11 +98,18 @@
       currentUser() {
       return this.$store.state.auth.user;
       },
+      currentUserEst() {
+      return this.$store.state.authEs.estudiante;
+      }
     },
     methods:{
       logOut() {
         this.$store.dispatch('auth/logout');
         this.$router.push('/LogIn');
+      },
+        logOutEst() {
+        this.$store.dispatch('authEs/logout');
+        this.$router.push('/LogInEst');
       }
     }
   }
