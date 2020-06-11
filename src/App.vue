@@ -5,7 +5,7 @@
       <v-btn rounded to="/LogIn" v-if="!currentUser && !currentUserEst">Login maestros</v-btn>
       <v-btn rounded to="/LogInEst" v-if="!currentUser && !currentUserEst">Login estudiantes</v-btn>
       <v-btn rounded to="/SignUp" v-if="!currentUser && !currentUserEst">Sign Up</v-btn>
-      <v-btn rounded to="/" v-if="currentUser">Mis cursos</v-btn>
+      <v-btn rounded to="/MisCursos" v-if="currentUser">Mis cursos</v-btn>
       <v-btn rounded to="/Profile" v-if="currentUser">Perfil</v-btn>
       <v-btn rounded to="/ProfileEst" v-if="currentUserEst">Perfil</v-btn>
       <v-btn rounded to="/CrearDocente" v-if="currentUser && currentUser.rol == 'ADMIN_ROLE'">Crear docente</v-btn>
