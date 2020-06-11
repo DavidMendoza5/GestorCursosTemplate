@@ -46,10 +46,10 @@ const routes = [{
             import ('../views/Profile.vue')
     },
     {
-        path: '/ProfileEst',
-        name: 'ProfileEstudiante',
+        path: '/crearCurso',
+        name: 'CrearCurso',
         component: () =>
-            import ('../views/profileEstudiante.vue')
+            import ('../views/CrearCurso.vue')
     },
     {
         path: '/CrearDocente',
