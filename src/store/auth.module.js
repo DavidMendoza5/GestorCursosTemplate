@@ -1,11 +1,10 @@
 import AuthService from '../services/auth.service';
+import CursoService from '../services/cursos.service'
 
 const user = JSON.parse(localStorage.getItem('user'));
-const initialState = user
-    ? { status: { loggedIn: true }, user }
-    : { status: { loggedIn: false }, user: null };
+const initialState = user ? { status: { loggedIn: true }, user } : { status: { loggedIn: false }, user: null };
 
-  export const auth = {
+export const auth = {
     namespaced: true,
     state: initialState,
     //token: user.token || '',
@@ -18,7 +17,7 @@ const initialState = user
                 },
                 error => {
                     commit('loginFailure');
-                    return Promise.reject(error); 
+                    return Promise.reject(error);
                 }
             );
         },
@@ -40,6 +39,22 @@ const initialState = user
             ).catch(error => {
                 console.log(error);
             })
+        },
+        //'vuex' post de crearCurso
+        crearCurso({ commit }, curso) {
+            return CursoService.crearCurso(curso).then(
+                curso => {
+                    console.log(curso)
+                    commit('cursoSuccess', curso);
+                    return Promise.resolve(curso);
+                },
+                error => {
+                    commit('cursoFailure');
+                    return Promise.reject(error);
+                }
+            ).catch(error => {
+                console.log(error);
+            })
         }
     },
     mutations: {
@@ -56,10 +71,16 @@ const initialState = user
             state.user = null;
         },
         registerSuccess(state) {
-            state.status.loggedIn = false; 
+            state.status.loggedIn = false;
         },
         registerFailure(state) {
             state.status.loggedIn = false;
+        },
+        cursoSuccess(state) {
+            state.status.loggedIn = true; //Indica estar autenticado
+        },
+        cursoFailure(state) {
+            state.status.loggedIn = true;
         }
     }
-  }
+}
