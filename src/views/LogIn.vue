@@ -43,8 +43,8 @@ export default {
     //user: new User('', ''),
     user: {correo: "", password: ""},
     showPassword: false,
-        snackbar: false,
-        message:''
+    snackbar: false,
+    message:''
   }),
   computed:{
     loggedIn(){

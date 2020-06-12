@@ -11,7 +11,7 @@ class AuthService {
             correo: user.correo,
             password: user.password
         }).then(response => {
-            if(response.data.token) {
+            if (response.data.token) {
                 const token = response.data.token
                 localStorage.setItem('token', token)
                 localStorage.setItem('user', JSON.stringify(response.data));
@@ -28,15 +28,14 @@ class AuthService {
         //docente = JSON.parse(localStorage.getItem('user'));
         console.log(localStorage.getItem('token'));
         var config = {
-            headers: {'Authorization': localStorage.getItem('token')}
+            headers: { 'Authorization': localStorage.getItem('token') }
         };
-            return axios.post(url+'crearDocente', {
-                nombre: user.nombre,
-                correo: user.correo,
-                password: user.password,
-                cargo: user.cargo
-            },config
-            )
+        return axios.post(url + 'crearDocente', {
+            nombre: user.nombre,
+            correo: user.correo,
+            password: user.password,
+            cargo: user.cargo
+        }, config)
     }
 }
 export default new AuthService();
