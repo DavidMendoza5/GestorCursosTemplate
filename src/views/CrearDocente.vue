@@ -3,7 +3,7 @@
   <v-form 
         ref="form"
         v-model="valid"
-        lazy-validation
+        :lazy-validation="lazy"
         @submit.prevent="crearDocente">
     <v-container>
       <v-row>
@@ -61,12 +61,16 @@
       :disabled="!valid"
       color="success"
       class="mr-4"
-      type="submit" 
+      type="submit"
       >
-        sign in
+        Registrar
       </v-btn>
     </div>
     </v-container>
+        <v-snackbar v-model="snackbar">
+      <!--{{ message.message }}--> Docente creado correctamente
+      <v-btn color="blue" text @click="snackbar=false">cerrar</v-btn>
+    </v-snackbar>
   </v-form>
 </template>
 
@@ -82,9 +86,11 @@
         email: '',
         emailRules: [
             v => !!v || 'E-mail is required',
-            v => /.+@.+/.test(v) || 'E-mail must be valid',
+            v => /^.+@huasteco.com+$/.test(v) || 'E-mail must be valid',
         ],
-        docente: { nombre:'', correo:'', password:'', cargo:''}
+        docente: { nombre:'', correo:'', password:'', cargo:''},
+        snackbar: false,
+        lazy: false
     }),
     methods: {
         crearDocente() {
@@ -92,6 +98,7 @@
             this.$store.dispatch('auth/register', this.docente).then(
             data => {
               this.successful = true;
+              this.snackbar = true;
             },
             error => {
               console.log(

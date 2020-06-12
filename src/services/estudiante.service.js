@@ -27,14 +27,14 @@ class EstudianteService {
             if(response.data.token) {
                 const token = response.data.token
                 localStorage.setItem('token', token)
-                localStorage.setItem('user', JSON.stringify(response.data));
+                localStorage.setItem('estudiante', JSON.stringify(response.data));
             }
             return response.data;
         })
     }
 
     logout() {
-        localStorage.removeItem('user');
+        localStorage.removeItem('estudiante');
         localStorage.removeItem('token');
     }
 }
