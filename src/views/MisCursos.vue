@@ -2,12 +2,16 @@
     <v-parallax
     dark
     src="https://www.bumeran.com.mx/noticias/wp-content/uploads/2016/11/porta1.png"
-    height="1000" width="1980"
-  >
+    height="1000" width="1980">
+
+    <div class="mr-5 mt-5" align="right">
+      <v-btn color="error" to="/CrearCurso" dark large>CREAR CURSO</v-btn>
+    </div>
+
     <v-row
       align="center"
-      justify="center"
-    >
+      justify="center">
+
       <v-col class="text-center" cols="12">
         <v-card width="930" class="mx-auto mt-5">
         <h1 class="subheading">Esta es la lista de cursos que posee</h1>
