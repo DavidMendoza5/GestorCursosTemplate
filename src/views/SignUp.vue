@@ -49,7 +49,8 @@
     <v-text-field
       prepend-icon="mdi-checkbox-marked-circle"
       v-model="estudiante.telefono"
-      label="Teléfono: 000-000-0000"
+      label="Teléfono"
+      :hint="'000-000-0000'"
       required
     ></v-text-field>
 
