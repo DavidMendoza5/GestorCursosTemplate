@@ -1,7 +1,9 @@
 <template>
   <v-layout column align-center class="pa-8">
     <v-flex xs12 sm8 md6>
-      <v-form @submit.prevent="crearCurso">
+      <v-form 
+      v-model="valid"
+      @submit.prevent="crearCurso">
       <v-card
         class="overflow-hidden"
         color="blue-grey"
@@ -12,35 +14,27 @@
         <v-icon>mdi-account</v-icon>
         <v-toolbar-title class="font-weight-light ml-3">Register a course</v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-btn
-          color="blue-grey"
-          fab
-          small
-          @click="isEditing = !isEditing">
-          <v-icon v-if="isEditing">mdi-close</v-icon>
-          <v-icon v-else>mdi-pencil</v-icon>
-        </v-btn>
       </v-toolbar>
 
       <v-card-text>
         <v-text-field
-          :disabled="!isEditing"
           color="white"
           v-model="curso.nombre"
+          :rules="nombreRules"
+          :counter="25"
           label="Nombre">
         </v-text-field>
 
         <v-text-field
-          :disabled="!isEditing"
           color="white"
           v-model="curso.docente"
+          :rules="docenteRules"
           label="Docente ID">
         </v-text-field>
 
         <v-layout>
           <v-flex class="mb-6">
             <v-text-field
-            :disabled="!isEditing"
             color="white"
             v-model="curso.fecha_inicio"
             label="Fecha inicio">
@@ -49,7 +43,6 @@
           <v-flex class="mb-1"></v-flex>
           <v-flex class="mb-6">
             <v-text-field
-            :disabled="!isEditing"
             color="white"
             v-model="curso.fecha_final"
             label="Fecha final">
@@ -60,7 +53,6 @@
         <v-layout>
           <v-flex class="mb-6">
             <v-autocomplete
-            :disabled="!isEditing"
             :items="status"
             color="white"
             item-text="id"
@@ -75,9 +67,9 @@
         <v-layout>
           <v-flex class="mb-6">
             <v-text-field
-            :disabled="!isEditing"
             color="white"
             v-model="curso.hora"
+            :rules="horaRules"
             label="Hora"
             :hint="'Horas'">
             </v-text-field>
@@ -85,9 +77,9 @@
           <v-flex class="mb-1"></v-flex>
           <v-flex class="mb-6">
             <v-text-field
-            :disabled="!isEditing"
             color="white"
             v-model="curso.duracion"
+            :rules="duracionRules"
             label="Duración"
             :hint="'Horas'">
             </v-text-field>
@@ -97,7 +89,6 @@
         <v-layout>
           <v-flex class="mb-6">
             <v-text-field
-            :disabled="!isEditing"
             color="white"
             v-model="curso.precio"
             label="Precio"
@@ -107,23 +98,22 @@
           <v-flex class="mb-1"></v-flex>
           <v-flex class="mb-6">
             <v-text-field
-            :disabled="!isEditing"
             color="white"
             v-model="curso.cupoLimite"
+            :rules="cupolimiteRules"
             label="Cupo límite">
             </v-text-field>
           </v-flex>
         </v-layout>
 
         <v-text-field
-          :disabled="!isEditing"
           color="white"
           v-model="curso.descripcion"
+          :rules="descripcionRules"
           label="Descripción">
         </v-text-field>
 
         <v-text-field
-          :disabled="!isEditing"
           color="white"
           v-model="curso.requisitos"
           label="Requisitos">
@@ -135,27 +125,20 @@
     <v-card-actions class="pa-5">
       <v-spacer></v-spacer>
       <v-btn
-        :disabled="!isEditing"
+        :disabled="!valid"
         color="teal"
         type="submit">
         GUARDAR
-      </v-btn>
-      <v-btn
-        :disabled="!isEditing"
-        color="error"
-        class="mr-4"
-        @click="reset">
-        Reset Form
       </v-btn>
     </v-card-actions>
 
     <v-snackbar
       v-model="snackbar"
-      :timeout="2000"
+      :timeout="3000"
       absolute
       bottom
       left
-      color="teal">
+      color="dark">
       Se ha añadido un nuevo curso
     </v-snackbar>
   </v-card>
@@ -169,10 +152,9 @@
     name: "crearCurso",
     data () {
       return {
+        valid: true,
         snackbar: false,
         message:'',
-        hasSaved: false,
-        isEditing: null,
         model: null,
         status: [
           { id: 1 },
@@ -181,25 +163,33 @@
           { id: 4 },
           { id: 5 }
         ],
-        valid: true,
-        nameRules: [
-        v => !!v || 'Name is required',
+        nombreRules: [
+        v => !!v || 'Nombre es requerido',
         v => (v && v.length <= 25) || 'Name must be less than 25 characters',
         ],
-        docentelRules: [
-          v => !!v || 'E-mail is required',
+        docenteRules: [
+          v => !!v || 'ID Docente es requerido',
           //v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
         ],
-        temarioRules: [
-          v => !!v || 'Password is required',
+        horaRules: [
+          v => !!v || 'Hora es requerida',
+        ],
+        duracionRules: [
+          v => !!v || 'Duración es requerida',
+        ],
+        cupolimiteRules: [
+          v => !!v || 'Cupo limitado es requerido',
+        ],
+        descripcionRules: [
+          v => !!v || 'Descripción es requerida',
         ],
         curso: { nombre:'', docente:'',fecha_inicio:'', fecha_final:'', status:'',hora:'', duracion:'',precio:'',cupoLimite:'',descripcion:'',requisitos:''}
       }
     },
 
     methods: {
-      reset () {
-        this.$refs.form.reset()
+      validate () {
+        this.$refs.form.validate()
       },
       crearCurso(){
         console.log(this.curso)
