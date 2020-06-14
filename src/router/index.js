@@ -64,10 +64,16 @@ const routes = [{
             import ('../views/LogInEst.vue')
     },
     {
-      path: '/MisCursos',
-      name: 'MisCursos',
-      component: () =>
-          import ('../views/MisCursos.vue')
+        path: '/MisCursos',
+        name: 'MisCursos',
+        component: () =>
+            import ('../views/MisCursos.vue')
+    },
+    {
+        path: '/crearEtiqueta',
+        name: 'CrearEtiqueta',
+        component: () =>
+            import ('../views/CrearEtiqueta.vue')
     }
 ]
 
