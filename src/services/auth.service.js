@@ -37,5 +37,16 @@ class AuthService {
             cargo: user.cargo
         }, config)
     }
+    update(user,id) {
+        var config = {
+            headers: { 'Authorization': localStorage.getItem('token') }
+        };
+        return axios.put(url+'actualizarDocente/'+id, {
+            nombre: user.nombre,
+            correo: user.correo,
+            password: user.password,
+            cargo: user.cargo
+        }, config)
+    }
 }
 export default new AuthService();
