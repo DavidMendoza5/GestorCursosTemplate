@@ -18,20 +18,6 @@
             required
           ></v-text-field>
         </v-col>
-
-        <v-col
-          cols="12"
-          md="4"
-        >
-          <v-text-field
-            v-model="docente.password"
-            :rules="nameRules"
-            :counter="10"
-            label="Contraseña"
-            required
-          ></v-text-field>
-        </v-col>
-
         <v-col
           cols="12"
           md="4"
@@ -87,14 +73,14 @@ export default {
         valid: true,
         nameRules: [
             v => !!v || 'Name is required',
-            v => v.length >= 3 || 'Name must be at least more than 3 characters',
+            v => v.length >= 3 || 'Must be at least more than 3 characters',
         ],
         email: '',
         emailRules: [
             v => !!v || 'E-mail is required',
             v => /^.+@huasteco.com+$/.test(v) || 'E-mail must be valid (email@huasteco.com)',
         ],
-        docente: { nombre:'', correo:'', password:'', cargo:''},
+        docente: { nombre:'', correo:'', cargo:''},
         snackbar: false,
         //lazy: false
     }),
