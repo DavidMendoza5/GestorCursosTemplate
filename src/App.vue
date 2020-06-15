@@ -2,6 +2,7 @@
   <v-app>
     <v-app-bar dense dark app>
       <v-btn rounded to="/">Inicio</v-btn>
+      <v-btn rounded href="http://localhost:3800/" target="_blank">Chat</v-btn>
       <v-btn rounded to="/LogIn" v-if="!currentUser && !currentUserEst">Login maestros</v-btn>
       <v-btn rounded to="/LogInEst" v-if="!currentUser && !currentUserEst">Login estudiantes</v-btn>
       <v-btn rounded to="/SignUp" v-if="!currentUser && !currentUserEst">Sign Up</v-btn>
@@ -78,7 +79,7 @@
       </v-card-title>
 
       <v-card-text class="py-2 white--text text-center font-weight-light">
-        {{ new Date().getFullYear() }} — <strong class="body-1 font-weight-light">Derechos de autor @HuasTechnology, Inc.</strong>
+        {{ new Date().getFullYear() }} — <strong class="body-1 font-weight-light">Todos los Derechos Reservados HuasTechnology®, Inc.</strong>
       </v-card-text>
     </v-card>
   </v-footer>
