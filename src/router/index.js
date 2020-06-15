@@ -80,6 +80,12 @@ const routes = [{
         name: 'CrearComentario',
         component: () =>
             import ('../views/CrearComentario.vue')
+    },
+    {
+        path: '/ModificarInfo',
+        name: 'ModificarInfo',
+        component: () =>
+            import ('../views/ModificarInfo.vue')
     }
 ]
 
