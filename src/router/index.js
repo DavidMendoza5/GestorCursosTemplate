@@ -64,17 +64,29 @@ const routes = [{
             import ('../views/LogInEst.vue')
     },
     {
-      path: '/MisCursos',
-      name: 'MisCursos',
-      component: () =>
-          import ('../views/MisCursos.vue')
+        path: '/MisCursos',
+        name: 'MisCursos',
+        component: () =>
+            import ('../views/MisCursos.vue')
+    },
+    {
+        path: '/crearEtiqueta',
+        name: 'CrearEtiqueta',
+        component: () =>
+            import ('../views/CrearEtiqueta.vue')
+    },
+    {
+        path: '/crearComentario',
+        name: 'CrearComentario',
+        component: () =>
+            import ('../views/CrearComentario.vue')
     },
     {
         path: '/ModificarInfo',
         name: 'ModificarInfo',
         component: () =>
             import ('../views/ModificarInfo.vue')
-      }
+    }
 ]
 
 const router = new VueRouter({

@@ -1,5 +1,6 @@
 import AuthService from '../services/auth.service';
-import CursoService from '../services/cursos.service'
+import CursoService from '../services/cursos.service';
+import EtiquetaService from '../services/etiqueta.service';
 
 const user = JSON.parse(localStorage.getItem('user'));
 const initialState = user ? { status: { loggedIn: true }, user } : { status: { loggedIn: false }, user: null };
@@ -55,6 +56,22 @@ export const auth = {
             ).catch(error => {
                 console.log(error);
             })
+        },
+        //'vuex' post crearEtiqueta
+        crearEtiqueta({ commit }, etiqueta) {
+            return EtiquetaService.crearEtiqueta(etiqueta).then(
+                etiqueta => {
+                    console.log(etiqueta)
+                    commit('etiquetaSuccess', etiqueta);
+                    return Promise.resolve(etiqueta);
+                },
+                error => {
+                    commit('etiquetaFailure');
+                    return Promise.reject(error);
+                }
+            ).catch(error => {
+                console.log(error);
+            })
         }
     },
     mutations: {
@@ -80,6 +97,12 @@ export const auth = {
             state.status.loggedIn = true; //Indica estar autenticado
         },
         cursoFailure(state) {
+            state.status.loggedIn = true;
+        },
+        etiquetaSuccess(state) {
+            state.status.loggedIn = true; //Indica estar autenticado
+        },
+        etiquetaFailure(state) {
             state.status.loggedIn = true;
         }
     }

@@ -169,7 +169,6 @@
         ],
         docenteRules: [
           v => !!v || 'ID Docente es requerido',
-          //v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
         ],
         horaRules: [
           v => !!v || 'Hora es requerida',
@@ -192,7 +191,6 @@
         this.$refs.form.validate()
       },
       crearCurso(){
-        console.log(this.curso)
             this.$store.dispatch('auth/crearCurso', this.curso).then(
             data => {
               this.successful = true;
