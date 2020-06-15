@@ -79,7 +79,7 @@
       </v-card-title>
 
       <v-card-text class="py-2 white--text text-center font-weight-light">
-        {{ new Date().getFullYear() }} — <strong class="body-1 font-weight-light">Derechos de autor @HuasTechnology, Inc.</strong>
+        {{ new Date().getFullYear() }} — <strong class="body-1 font-weight-light">Todos los Derechos Reservados HuasTechnology®, Inc.</strong>
       </v-card-text>
     </v-card>
   </v-footer>
