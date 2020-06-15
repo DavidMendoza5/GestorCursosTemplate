@@ -44,7 +44,6 @@ class AuthService {
         return axios.put(url+'actualizarDocente/'+id, {
             nombre: user.nombre,
             correo: user.correo,
-            password: user.password,
             cargo: user.cargo
         }, config)
     }
