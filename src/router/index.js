@@ -68,7 +68,13 @@ const routes = [{
       name: 'MisCursos',
       component: () =>
           import ('../views/MisCursos.vue')
-    }
+    },
+    {
+        path: '/ModificarInfo',
+        name: 'ModificarInfo',
+        component: () =>
+            import ('../views/ModificarInfo.vue')
+      }
 ]
 
 const router = new VueRouter({
