@@ -86,6 +86,12 @@ const routes = [{
         name: 'ModificarInfo',
         component: () =>
             import ('../views/ModificarInfo.vue')
+    },
+    {
+        path: '/ProfileEst',
+        name: 'ProfileEst',
+        component: () =>
+            import ('../views/profileEstudiante.vue')
     }
 ]
 
