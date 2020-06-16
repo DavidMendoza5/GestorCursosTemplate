@@ -19,10 +19,44 @@
       </v-col>
     </v-row>
 <v-row>
-  <v-col cols="12" sm="6" offset-sm="3">
+    <v-col cols="12" sm="6" offset-sm="3">
+        <v-card>
+          <v-form name="form" @submit.prevent="search(idCursos)">
+            <h2>Ingrese el id del curso que busca</h2>
+            <v-text-field
+            prepend-icon="mdi-magnify"
+            v-model="idCursos"
+            name="Curso_Id"
+            label="Id del Curso"
+            />             
+            <v-card>
+              <v-card-actions>
+                <v-btn color="green" type="submit">Buscar curso</v-btn>
+                <v-btn color="blue" :disabled="!valid" to="/ModificarCurso">Actualizar datos</v-btn>
+                <v-btn color="red" :disabled="!valid">Eliminar</v-btn>
+              </v-card-actions>              
+            </v-card>
+          </v-form>
+        </v-card>
+
+  <v-col cols="12" sm="26">
+          <v-card>
+            <div v-for="(curso3,index) in cursos3" :key="index">
+              <v-icon>mdi-school</v-icon>
+              <h3>Id del curso</h3>
+              {{curso3._id}}
+              <h3>Nombre del curso</h3>
+              {{curso3.nombre}}
+              <h3>cupo limite</h3>
+              {{curso3.cupoLimite}}
+           </div>
+          </v-card>
+  </v-col>
+
     <v-card>
       <v-subheader inset>Cursos</v-subheader>
-        <div v-for="(curso, index) in cursos" :key="index">
+
+      <div v-for="(curso, index) in cursos" :key="index">
           
           <v-list-item v-for="(curso2, index2) in curso" :key="index2"  link>
             
@@ -38,7 +72,7 @@
               </v-list-item-action>    
   
           </v-list-item>
-        </div>
+        </div> 
     </v-card>
   </v-col>
 </v-row>
@@ -53,9 +87,12 @@ import DocenteService from '../services/docentes.service';
     
         return {
         dialog: false,
+        valid: false,
         cursos: [],
         cursos2: [],
-        docentes: []
+        cursos3: [],
+        docentes: [],
+        idCursos: ''
       }
     
     },
@@ -66,9 +103,17 @@ import DocenteService from '../services/docentes.service';
     },
     mounted() {
         CursoService.getCursos().then(Response => {
-        console.log(Response.data)
         this.cursos = Response.data;
       })
+    },
+    methods:{
+      search(id){
+        CursoService.getCursoById(id).then(Response=>{
+          console.log(Response.data)
+          this.cursos3 = Response.data;
+          this.valid = true
+        })
+      }
     }
   }
 </script>
