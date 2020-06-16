@@ -92,7 +92,13 @@ const routes = [{
         name: 'ProfileEst',
         component: () =>
             import ('../views/profileEstudiante.vue')
-    }
+    },
+    {
+        path: '/ModificarCurso',
+        name: 'ModificarCurso',
+        component: () =>
+            import ('../views/ModificarCurso.vue')
+      }
 ]
 
 const router = new VueRouter({
