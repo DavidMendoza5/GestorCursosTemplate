@@ -24,7 +24,7 @@ class EstudianteService {
             correo: user.correo,
             password: user.password
         }).then(response => {
-            if(response.data.token) {
+            if (response.data.token) {
                 const token = response.data.token
                 localStorage.setItem('token', token)
                 localStorage.setItem('estudiante', JSON.stringify(response.data));
@@ -36,6 +36,20 @@ class EstudianteService {
     logout() {
         localStorage.removeItem('estudiante');
         localStorage.removeItem('token');
+    }
+
+    //Actualización con axios
+    actualizarEstudiante(estudiante, id) {
+        var config = {
+            headers: { 'Authorization': localStorage.getItem('token') }
+        };
+        return axios.put(url + 'actualizarEstudiante/' + id, {
+            nombre: estudiante.nombre,
+            correo: estudiante.correo,
+            telefono: estudiante.telefono,
+            cargo: estudiante.cargo,
+            conocimientos_previos: estudiante.conocimientos_previos
+        }, config)
     }
 }
 

@@ -94,17 +94,23 @@ const routes = [{
             import ('../views/profileEstudiante.vue')
     },
     {
+        path: '/actualizarEst',
+        name: 'ActualizarEst',
+        component: () =>
+            import ('../views/ModificarInfoEst.vue')
+    },
+    {
         path: '/ModificarCurso',
         name: 'ModificarCurso',
         component: () =>
             import ('../views/ModificarCurso.vue')
-      },
-      {
+    },
+    {
         path: '/GoogleMapLoader',
         name: 'GoogleMapLoader',
         component: () =>
             import ('../views/GoogleMapLoader.vue')
-      }
+    }
 ]
 
 const router = new VueRouter({

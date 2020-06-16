@@ -63,6 +63,17 @@
                 etiqueta: {etiqueta:'',referenciaId:''}
             }
         },
+        computed: {
+            currentUser(){
+                return this.$store.state.auth.user; //Referencia de 'store/auth.module'. Accedes al LocalStorage
+            }
+        },
+        mounted() {
+        //Protege las rutas, se necesita estar logueado
+            if (!this.currentUser) {
+            this.$router.push('/LogIn');
+            }
+        },
         methods: {
             validate(){
                 this.$refs.form.validate()
