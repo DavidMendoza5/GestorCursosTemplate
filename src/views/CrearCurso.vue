@@ -185,7 +185,17 @@
         curso: { nombre:'', docente:'',fecha_inicio:'', fecha_final:'', status:'',hora:'', duracion:'',precio:'',cupoLimite:'',descripcion:'',requisitos:''}
       }
     },
-
+    computed: {
+      currentUser(){
+        return this.$store.state.auth.user; //Referencia de 'store/auth.module'. Accedes al LocalStorage
+      }
+    },
+    mounted() {
+      //Protege las rutas, se necesita estar logueado
+      if (!this.currentUser) {
+        this.$router.push('/LogIn');
+      }
+    },
     methods: {
       validate () {
         this.$refs.form.validate()
