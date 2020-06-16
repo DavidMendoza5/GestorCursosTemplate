@@ -92,6 +92,12 @@ const routes = [{
         name: 'ProfileEst',
         component: () =>
             import ('../views/profileEstudiante.vue')
+    },
+    {
+        path: '/actualizarEst',
+        name: 'ActualizarEst',
+        component: () =>
+            import ('../views/ModificarInfoEst.vue')
     }
 ]
 
