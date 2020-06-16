@@ -39,7 +39,7 @@
           </v-flex>
           <v-flex md-3>
             <v-container>
-              <a href="#" class="secondary--text font-weight-light">¿Quiénes somos?</a>
+              <v-btn text href="#" to="/About" class="secondary--text font-weight-light">¿Quiénes somos?</v-btn>
               <v-flex>
                 <a href="#" class="secondary--text font-weight-light">Empleo</a>
               </v-flex>
@@ -47,7 +47,7 @@
           </v-flex>
           <v-flex md-3>
             <v-container>
-              <a href="#" class="secondary--text font-weight-light">Mapa del sitio</a>
+              <v-btn text href="#" to="/GoogleMapLoader" class="secondary--text font-weight-light">Mapa del sitio</v-btn>
               <v-flex>
                 <a href="#" class="secondary--text font-weight-light">Cursos destacados</a>
               </v-flex>
