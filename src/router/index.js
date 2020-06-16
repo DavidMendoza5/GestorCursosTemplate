@@ -98,6 +98,12 @@ const routes = [{
         name: 'ModificarCurso',
         component: () =>
             import ('../views/ModificarCurso.vue')
+      },
+      {
+        path: '/GoogleMapLoader',
+        name: 'GoogleMapLoader',
+        component: () =>
+            import ('../views/GoogleMapLoader.vue')
       }
 ]
 
