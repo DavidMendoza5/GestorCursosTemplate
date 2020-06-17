@@ -29,9 +29,13 @@
               <v-card-actions>
                 <v-btn color="green" type="submit">Buscar curso</v-btn>
                 <v-btn color="blue" :disabled="!valid" to="/ModificarCurso">Actualizar datos</v-btn>
-                <v-btn color="red" :disabled="!valid">Eliminar</v-btn>
+                <v-btn color="red" :disabled="!valid" @click="eliminarCurso()">Eliminar</v-btn>
               </v-card-actions>              
             </v-card>
+            <v-snackbar v-model="snackbar">
+                <!--{{ message.message }}--> Curso eliminado correctamente
+               <v-btn color="blue" text @click="snackbar=false">cerrar</v-btn>
+            </v-snackbar>
           </v-form>
         </v-card>
 
@@ -93,14 +97,14 @@ import DocenteService from '../services/docentes.service';
         docentes: [],
         idCursos: '',
         buscar: false,
-        cursoLocalStorage:'' 
+        snackbar: false
       }
     
     },
     computed: {
-        currentUser() {
-            return this.$store.state.auth.user;
-        }
+      currentUser() {
+          return this.$store.state.auth.user;
+      }
     },
     mounted() {
         CursoService.getCursos().then(Response => {
@@ -114,6 +118,14 @@ import DocenteService from '../services/docentes.service';
           localStorage.setItem('curso', JSON.stringify(this.cursos3[0]))
           this.valid = true;
           this.buscar =true;
+        })
+      },
+      eliminarCurso() {
+        const curso_eliminar = JSON.parse(localStorage.getItem('curso'))
+        //console.log(curso_eliminar._id);
+        CursoService.eliminarCurso(curso_eliminar._id).then(response => {
+          localStorage.removeItem('curso');
+          this.snackbar = true;
         })
       }
     }

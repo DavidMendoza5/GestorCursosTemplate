@@ -47,6 +47,13 @@ class CursoService {
             requisitos: curso.requisitos
         }, config)
     }
+
+    eliminarCurso(id) {
+        var config = {
+            headers: { 'Authorization': localStorage.getItem('token') }
+        };
+        return axios.delete(url + 'eliminarCurso/' + id, config)
+    }
 }
 
 export default new CursoService();
