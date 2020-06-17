@@ -5,9 +5,11 @@ class CursoService {
     getCursos() {
         return axios.get(url + 'obtenerCursoDisponible')
     }
-    getCursoById(id){
+    getCursoById(id) {
         return axios.get(url + 'obtenerCurso/' + id)
+
     }
+
     crearCurso(curso) {
         console.log(localStorage.getItem('token'));
         var config = {
@@ -28,13 +30,12 @@ class CursoService {
         }, config)
     }
 
-    ActualizarCurso(Curso) {
+    actualizarCurso(curso, id) {
         var config = {
             headers: { 'Authorization': localStorage.getItem('token') }
         };
-        return axios.put(url + '/actualizarCurso', {
+        return axios.put(url + 'actualizarCurso/' + id, {
             nombre: curso.nombre,
-            docente: curso.docente,
             fecha_inicio: curso.fecha_inicio,
             fecha_final: curso.fecha_final,
             status: curso.status,

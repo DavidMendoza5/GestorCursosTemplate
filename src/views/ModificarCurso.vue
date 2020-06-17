@@ -2,7 +2,7 @@
     <v-form 
         ref="form"
         v-model="valid"
-        @submit.prevent="search(curso2.id)">
+        @submit.prevent="modificarCurso(currentCurso._id)">
     <h2>Hola {{ currentUser.nombre }}, ingrese los datos que desea modificar</h2>
     <v-container>
     <v-row>
@@ -24,21 +24,7 @@
           md="4"
         >
           <v-text-field
-            v-model="curso.docente"
-            :rules="docenteRules"
-            :counter="10"
-            label="Docente"
-            required
-          ></v-text-field>
-        </v-col>
-
-        <v-col
-          cols="12"
-          md="4"
-        >
-          <v-text-field
             v-model="curso.fecha_inicio"
-            :rules="FechaRules"
             label="Fecha de inicio"
             required
           ></v-text-field>
@@ -49,7 +35,6 @@
         >
           <v-text-field
             v-model="curso.fecha_final"
-            :rules="FechaRules"
             label="Fecha final"
             required
           ></v-text-field>
@@ -83,7 +68,7 @@
         >
           <v-text-field
             v-model="curso.precio"
-            :rules="nameRules"
+            :rules="precioRules"
             label="Precio"
             :hint="'Pesos'"
             required
@@ -117,7 +102,6 @@
         >
           <v-text-field
             v-model="curso.requisitos"
-            :rules="nameRules"
             label="Requisitos"
             required
           ></v-text-field>
@@ -143,17 +127,15 @@
       :disabled="!valid"
       color="success"
       class="mr-4"
-      type="submit"
-      >
+      type="submit">
         Modificar
       </v-btn>
     </div>
     <div class="ma-3">
         <h2>Sus datos actuales</h2>
-        <h3>Nombre: {{ currentUser.nombre }}</h3>
-        <h3>Correo: {{ currentUser.correo }}</h3>
-        <h3>ID: {{ currentUser.id }}</h3>
-        <h3>nombre del curso: {{curso.nombre}}</h3>
+        <h3>Nombre: {{ currentCurso.nombre }}</h3>
+        <h3>Correo: {{ currentCurso.descripcion }}</h3>
+        <h3>ID: {{ currentCurso._id }}</h3>
     </div>
     </v-container>
         <v-snackbar v-model="snackbar">
@@ -164,7 +146,7 @@
 </template>
 
 <script>
-import CursoService from '../services/cursos.service';
+
 import cursosService from '../services/cursos.service';
 export default {
     name: 'ModificarCurso',
@@ -184,10 +166,6 @@ export default {
         v => !!v || 'Nombre es requerido',
         v => (v && v.length <= 25) || 'Name must be less than 25 characters',
         ],
-        docenteRules: [
-          v => !!v || 'ID Docente es requerido',
-          //v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
-        ],
         horaRules: [
           v => !!v || 'Hora es requerida',
         ],
@@ -200,13 +178,18 @@ export default {
         descripcionRules: [
           v => !!v || 'Descripción es requerida',
         ],
-        curso: { nombre:'', docente:'',fecha_inicio:'', fecha_final:'', status:'',hora:'', duracion:'',precio:'',cupoLimite:'',descripcion:'',requisitos:''},
-        snackbar: false,
-        //lazy: false
+        precioRules: [
+          v => !!v || 'Precio es requerido',
+        ],
+        curso: { nombre:'',fecha_inicio:'', fecha_final:'', status:'',hora:'', duracion:'',precio:'',cupoLimite:'',descripcion:'',requisitos:''},
+  
     }),
     computed: {
         currentUser() {
             return this.$store.state.auth.user;
+        },
+        currentCurso() {
+          return JSON.parse(localStorage.getItem('curso'))
         }
     },
     mounted() {
@@ -216,8 +199,10 @@ export default {
     },
     methods: {
       modificarCurso(id) {
-        cursosService.update(this.docente, id).then(data => {
+        cursosService.actualizarCurso(this.curso, id).then(data => {
             this.snackbar = true;
+            localStorage.removeItem('curso');
+            this.$router.push('/MisCursos');
         })
       }
     }

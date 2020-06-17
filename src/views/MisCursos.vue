@@ -1,9 +1,5 @@
 <template>
-    <v-parallax
-    dark
-    src="https://www.bumeran.com.mx/noticias/wp-content/uploads/2016/11/porta1.png"
-    height="1000" width="1980">
-
+    <v-app>
     <div class="mr-5 mt-5" align="right">
       <v-btn color="error" to="/CrearCurso" dark large>CREAR CURSO</v-btn>
     </div>
@@ -13,7 +9,7 @@
       justify="center">
 
       <v-col class="text-center" cols="12">
-        <v-card width="930" class="mx-auto mt-5">
+        <v-card width="930" class="mx-auto">
         <h1 class="subheading">Esta es la lista de cursos que posee</h1>
         </v-card>
       </v-col>
@@ -39,6 +35,7 @@
           </v-form>
         </v-card>
 
+  <template v-if="buscar === true">
   <v-col cols="12" sm="26">
           <v-card>
             <div v-for="(curso3,index) in cursos3" :key="index">
@@ -52,7 +49,9 @@
            </div>
           </v-card>
   </v-col>
+  </template>
 
+    <template v-if="buscar === false">
     <v-card>
       <v-subheader inset>Cursos</v-subheader>
 
@@ -74,9 +73,10 @@
           </v-list-item>
         </div> 
     </v-card>
+    </template>
   </v-col>
 </v-row>
-</v-parallax>
+</v-app>
 </template>
 
 <script>
@@ -84,7 +84,6 @@ import CursoService from '../services/cursos.service';
 import DocenteService from '../services/docentes.service';
   export default {
     data () {
-    
         return {
         dialog: false,
         valid: false,
@@ -92,7 +91,9 @@ import DocenteService from '../services/docentes.service';
         cursos2: [],
         cursos3: [],
         docentes: [],
-        idCursos: ''
+        idCursos: '',
+        buscar: false,
+        cursoLocalStorage:'' 
       }
     
     },
@@ -109,9 +110,10 @@ import DocenteService from '../services/docentes.service';
     methods:{
       search(id){
         CursoService.getCursoById(id).then(Response=>{
-          console.log(Response.data)
           this.cursos3 = Response.data;
-          this.valid = true
+          localStorage.setItem('curso', JSON.stringify(this.cursos3[0]))
+          this.valid = true;
+          this.buscar =true;
         })
       }
     }
