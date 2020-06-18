@@ -1,86 +1,75 @@
 <template>
-    <v-app>
-    <div class="mr-5 mt-5" align="right">
-      <v-btn color="error" to="/CrearCurso" dark large>CREAR CURSO</v-btn>
-    </div>
-
-    <v-row
-      align="center"
-      justify="center">
-
-      <v-col class="text-center" cols="12">
-        <v-card width="930" class="mx-auto">
-        <h1 class="subheading">Esta es la lista de cursos que posee</h1>
-        </v-card>
-      </v-col>
-    </v-row>
-<v-row>
-    <v-col cols="12" sm="6" offset-sm="3">
-        <v-card>
-          <v-form name="form" @submit.prevent="search(idCursos)">
-            <h2>Ingrese el id del curso que busca</h2>
-            <v-text-field
-            prepend-icon="mdi-magnify"
-            v-model="idCursos"
-            name="Curso_Id"
-            label="Id del Curso"
-            />             
-            <v-card>
+  <v-app>
+    <v-banner>
+      <v-layout>
+        <v-form name="form" @submit.prevent="search(idCursos)"> 
+          <v-layout>
+            <v-flex class="ma-1">
+              <v-card width="700" flat> <!--Elimina la elevación-->
+                <v-text-field placeholder="Buscar" outlined rounded v-model="idCursos" name="Curso_Id"></v-text-field>
+              </v-card>
+            </v-flex>
+            <v-flex>
               <v-card-actions>
-                <v-btn color="green" type="submit">Buscar curso</v-btn>
-                <v-btn color="blue" :disabled="!valid" to="/ModificarCurso">Actualizar datos</v-btn>
-                <v-btn color="red" :disabled="!valid" @click="eliminarCurso()">Eliminar</v-btn>
-              </v-card-actions>              
-            </v-card>
-            <v-snackbar v-model="snackbar">
-                <!--{{ message.message }}--> Curso eliminado correctamente
-               <v-btn color="blue" text @click="snackbar=false">cerrar</v-btn>
-            </v-snackbar>
-          </v-form>
-        </v-card>
+                <v-btn class="mx-3" color="green" type="submit" large>Buscar curso</v-btn>
+                <v-btn class="mx-3" color="blue" :disabled="!valid" to="/ModificarCurso" large>Actualizar datos</v-btn>
+                <v-btn class="mx-3" color="red" :disabled="!valid" @click="eliminarCurso()" large>Eliminar</v-btn>
+              </v-card-actions>
+            </v-flex>
+          </v-layout>
+          <v-snackbar v-model="snackbar">
+            Curso eliminado correctamente
+            <v-btn color="blue" text @click="snackbar=false">cerrar</v-btn>
+          </v-snackbar>
+        </v-form>
+        <v-flex class="ma-2 mx-12"><v-btn class="black--text" color="success" to="/CrearCurso" large>Crear curso</v-btn></v-flex>
+      </v-layout>
+    </v-banner>
+    
+    <div class="container" flat><h1 class="font-weight-regular mx-10">Mis cursos</h1></div>
+    <v-divider></v-divider>
 
-  <template v-if="buscar === true">
-  <v-col cols="12" sm="26">
-          <v-card>
-            <div v-for="(curso3,index) in cursos3" :key="index">
-              <v-icon>mdi-school</v-icon>
-              <h3>Id del curso</h3>
-              {{curso3._id}}
-              <h3>Nombre del curso</h3>
-              {{curso3.nombre}}
-              <h3>cupo limite</h3>
-              {{curso3.cupoLimite}}
-           </div>
-          </v-card>
-  </v-col>
-  </template>
-
-    <template v-if="buscar === false">
-    <v-card>
-      <v-subheader inset>Cursos</v-subheader>
-
-      <div v-for="(curso, index) in cursos" :key="index">
-          
-          <v-list-item v-for="(curso2, index2) in curso" :key="index2"  link>
-            
-            <v-list-item-content v-if="(curso2.docente == currentUser.id)">
-              <v-list-item-title>Nombre: {{ curso2.nombre}}</v-list-item-title>
-              <v-list-item-subtitle>Id: {{ curso2._id  }}</v-list-item-subtitle>
-              <v-list-item-subtitle>Docente: {{ curso2.docente  }}</v-list-item-subtitle>
+    <blockquote>
+      <template v-if="buscar === true"> <!--Oculta la tarjeta-->
+      <v-card class="mx-auto ma-8" max-width="494" outlined>
+        <div v-for="(curso3,index) in cursos3" :key="index"> <!--Permite obtener los datos del curso-->
+          <v-list-item three-line>
+            <v-list-item-content>
+              <v-list-item-title class="font-weight-regular mb-4">Docente {{curso3.docente._id}}</v-list-item-title>
+              <v-list-item-title class="headline mb-1">Curso {{curso3.nombre}}</v-list-item-title>
+              <v-list-item-title class="mb-4">ID {{curso3._id}}</v-list-item-title>
+              <v-list-item-title>Precio ${{curso3.precio}}</v-list-item-title>
+              <v-list-item-title>Cupo límite {{curso3.cupoLimite}}</v-list-item-title>
             </v-list-item-content>
+          </v-list-item>
+        </div>
+      </v-card>  
+      </template>
+
+      <template v-if="buscar === false">
+        <v-card class="mx-auto ma-8" max-width="544" outlined>
+          <v-toolbar flat color="grey darken-4">
+            <v-toolbar-title class="font-weight-light white--text ml-10">Historial de cursos</v-toolbar-title>
+            <v-spacer></v-spacer>
+          </v-toolbar>
+          <div v-for="(curso, index) in cursos" :key="index">
+            <v-list-item v-for="(curso2, index2) in curso" :key="index2"  link>
+              <v-list-item-content v-if="(curso2.docente == currentUser.id)"> <!--Muestra solo cursos del docente-->
+                <v-list-item-title>Curso {{ curso2.nombre}}</v-list-item-title>
+                <v-list-item-subtitle>ID {{ curso2._id  }}</v-list-item-subtitle>
+                <v-list-item-subtitle>Docente {{ curso2.docente  }}</v-list-item-subtitle>
+              </v-list-item-content>
               <v-list-item-action>
                 <v-btn icon>
                   <v-icon color="grey lighten-1">mdi-information</v-icon>
                 </v-btn>
               </v-list-item-action>    
-  
-          </v-list-item>
-        </div> 
-    </v-card>
-    </template>
-  </v-col>
-</v-row>
-</v-app>
+            </v-list-item>
+          </div>
+        </v-card>
+      </template>
+    </blockquote>
+  </v-app>
 </template>
 
 <script>
