@@ -71,6 +71,10 @@
       <!--{{ message.message }}--> Docente creado correctamente
       <v-btn color="blue" text @click="snackbar=false">cerrar</v-btn>
     </v-snackbar>
+      <v-snackbar v-model="errorMessage">
+        Error al crear docente
+      <v-btn color="blue" text @click="errorMessage=false">cerrar</v-btn>
+    </v-snackbar>
   </v-form>
 </template>
 
@@ -79,6 +83,7 @@
     name:"Register",
     data: () => ({
         valid: false,
+        errorMessage: false,
         nameRules: [
             v => !!v || 'Name is required',
             v => v.length >= 3 || 'Name must be at least more than 3 characters',
@@ -97,18 +102,16 @@
             console.log(this.docente)
             this.$store.dispatch('auth/register', this.docente).then(
             data => {
-              this.successful = true;
               this.snackbar = true;
             },
             error => {
               console.log(
                 (error.response && error.response.data) ||
                 error.message ||
-                error.toString()
-              )
-              this.successful = false;
-            }
-            )
+                error.toString())
+                this.snackbar = false;
+                this.errorMessage = true;
+            })
         }
     },
     computed: {
