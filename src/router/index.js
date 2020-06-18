@@ -113,11 +113,17 @@ const routes = [{
     },
     {
         path: '/Docentes',
-        name: 'Docentesr',
+        name: 'Docentes',
         component: () =>
             import ('../views/Docentes.vue')
+    },
+    {
+        path: '/Estudiante',
+        name: 'Estudiante',
+        component: () =>
+            import ('../views/Estudiante.vue')
     }
-    
+
 ]
 
 const router = new VueRouter({
