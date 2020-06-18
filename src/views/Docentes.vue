@@ -15,7 +15,7 @@
                     <v-card>
                         <v-card-actions>
                             <v-btn color="green" type="submit">Buscar docente</v-btn>
-                            <v-btn color="red" :disabled="!valid" @click="eliminarCurso()">Eliminar</v-btn>
+                            <v-btn color="red" :disabled="!valid" @click="eliminarDocente()">Eliminar</v-btn>
                         </v-card-actions>              
                     </v-card>
                     <v-snackbar v-model="snackbar">
@@ -50,7 +50,10 @@
     <template v-if="buscar===true">
         <v-col cols="12" sm="6" offset-sm="3">
             <v-card>
-                <v-card-title>Hola</v-card-title>
+                <v-card-title>Docente encontrado</v-card-title>
+                <h3> {{ docente[0]._id }} </h3>
+                <h3> {{ docente[0].nombre }} </h3>
+                <h3> {{ docente[0].correo }} </h3>
                 <!--<v-div v-for="">
                 </v-div>-->
             </v-card>
@@ -87,11 +90,20 @@ export default {
         search(id){
             DocenteService.getDocentesById(id).then(Response=>{
                 this.docente = Response.data;
-                console.log(Response.data);
+                localStorage.setItem('docente', JSON.stringify(this.docente[0]))
                 //localStorage.setItem('curso', JSON.stringify(this.docente[0]))
                 this.valid = true;
                 this.buscar =true;
             })
+        },
+        eliminarDocente() {
+            const docente_eliminar = JSON.parse(localStorage.getItem('docente'));
+            DocenteService.eliminarDocente(docente_eliminar._id).then(Response => {
+                localStorage.removeItem('docente');
+                this.snackbar = true;
+                this.idDocente = '';
+            })
+            this.buscar = false;
         }
     }
 }

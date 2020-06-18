@@ -34,7 +34,8 @@ class AuthService {
             nombre: user.nombre,
             correo: user.correo,
             password: user.password,
-            cargo: user.cargo
+            cargo: user.cargo,
+            role: 'DOCENT_ROLE'
         }, config)
     }
     update(user,id) {
