@@ -51,6 +51,13 @@ class EstudianteService {
             conocimientos_previos: estudiante.conocimientos_previos
         }, config)
     }
+
+    eliminarEstudiante(id) {
+        var config = {
+            headers: { 'Authorization': localStorage.getItem('token') }
+        };
+        return axios.delete(url + 'eliminarEstudiante/' + id, config)
+    }
 }
 
 export default new EstudianteService();

@@ -81,6 +81,9 @@ export default {
       }
     },
     mounted() {
+        if (!this.currentUser) {
+            this.$router.push('/LogIn');
+        }
         DocenteService.getDocentes().then(Response => {
             console.log(Response.data)
             this.docentes = Response.data;
