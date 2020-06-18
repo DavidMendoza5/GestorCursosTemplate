@@ -110,7 +110,14 @@ const routes = [{
         name: 'GoogleMapLoader',
         component: () =>
             import ('../views/GoogleMapLoader.vue')
+    },
+    {
+        path: '/Docentes',
+        name: 'Docentesr',
+        component: () =>
+            import ('../views/Docentes.vue')
     }
+    
 ]
 
 const router = new VueRouter({
