@@ -109,9 +109,13 @@ import DocenteService from '../services/docentes.service';
       search(id){
         CursoService.getCursoById(id).then(Response=>{
           this.cursos3 = Response.data;
-          localStorage.setItem('curso', JSON.stringify(this.cursos3[0]))
-          this.valid = true;
-          this.buscar =true;
+          if(this.cursos3[0] != undefined){
+            localStorage.setItem('curso', JSON.stringify(this.cursos3[0]))
+            this.valid = true;
+            this.buscar =true;
+          }else{
+            this.messageError = true;
+          }
         },
         err => {
           this.messageError = true;
