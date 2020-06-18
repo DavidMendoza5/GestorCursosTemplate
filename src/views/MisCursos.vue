@@ -13,6 +13,7 @@
               <v-card-actions>
                 <v-btn class="mx-3" color="green" type="submit" large>Buscar curso</v-btn>
                 <v-btn class="mx-3" color="blue" :disabled="!valid" to="/ModificarCurso" large>Actualizar datos</v-btn>
+                <v-btn class="mx-3" color="blue" :disabled="!valid" to="/crearEtiqueta" large>Crear etiqueta</v-btn>
                 <v-btn class="mx-3" color="red" :disabled="!valid" @click="eliminarCurso()" large>Eliminar</v-btn>
               </v-card-actions>
             </v-flex>
@@ -21,8 +22,11 @@
             Curso eliminado correctamente
             <v-btn color="blue" text @click="snackbar=false">cerrar</v-btn>
           </v-snackbar>
+          <v-snackbar v-model="messageError">
+            Id incorrecto
+            <v-btn color="blue" text @click="messageError=false">cerrar</v-btn>
+          </v-snackbar>
         </v-form>
-        <v-flex class="ma-2 mx-12"><v-btn class="black--text" color="success" to="/CrearCurso" large>Crear curso</v-btn></v-flex>
       </v-layout>
     </v-banner>
     
@@ -86,7 +90,8 @@ import DocenteService from '../services/docentes.service';
         docentes: [],
         idCursos: '',
         buscar: false,
-        snackbar: false
+        snackbar: false,
+        messageError: false
       }
     
     },
@@ -107,6 +112,9 @@ import DocenteService from '../services/docentes.service';
           localStorage.setItem('curso', JSON.stringify(this.cursos3[0]))
           this.valid = true;
           this.buscar =true;
+        },
+        err => {
+          this.messageError = true;
         })
       },
       eliminarCurso() {
