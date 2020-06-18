@@ -105,6 +105,10 @@
             Curso actualizado correctamente
             <v-btn color="blue" text @click="snackbar=false">cerrar</v-btn>
           </v-snackbar>
+            <v-snackbar v-model="messageError">
+              Error al actualizar el curso
+            <v-btn color="blue" text @click="messageError=false">cerrar</v-btn>
+          </v-snackbar>
           </v-card>
         </v-form>
       </v-flex>
@@ -143,6 +147,7 @@ export default {
     data: () => ({
         valid: true,
         snackbar: false,
+        messageError: false,
         message:'',
         model: null,
         status: [
@@ -196,6 +201,9 @@ export default {
             localStorage.removeItem('curso');
             //this.$router.push('/MisCursos');
             this.snackbar = true;
+        },
+        error => {
+          this.messageError = true;
         })
       }
     }
