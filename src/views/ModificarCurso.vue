@@ -1,148 +1,138 @@
 <template>
-    <v-form 
-        ref="form"
-        v-model="valid"
-        @submit.prevent="modificarCurso(currentCurso._id)">
-    <h2>Hola {{ currentUser.nombre }}, ingrese los datos que desea modificar</h2>
-    <v-container>
-    <v-row>
-        <v-col
-          cols="12"
-          md="4"
-        >
-          <v-text-field
+  <v-app>
+    <v-banner color="teal">
+      <div class="container mx-auto"><h1 class="font-weight-light mx-auto ml-10">¡Bienvenid@! {{ currentUser.nombre }}, ingrese los datos que desea modificar</h1></div>
+    </v-banner>
+
+    <v-layout class="pa-10 mx-12">
+      <v-flex xs12 sm8 md6 class="mb-8">
+        <v-form v-model="valid" @submit.prevent="modificarCurso(currentCurso._id)">
+        <v-card min-width="650">
+          <v-toolbar flat color="grey darken-4">
+            <v-toolbar-title class="font-weight-light white--text ml-10">Actualizar datos del curso</v-toolbar-title>
+            <v-spacer></v-spacer>
+          </v-toolbar>
+          <v-card-text>
+            <v-text-field
             v-model="curso.nombre"
             :rules="nombreRules"
-            :counter="20"
+            :counter="35"
             label="Nombre"
-            required
-          ></v-text-field>
-        </v-col>
-
-        <v-col
-          cols="12"
-          md="4"
-        >
-          <v-text-field
-            v-model="curso.fecha_inicio"
-            label="Fecha de inicio"
-            required
-          ></v-text-field>
-        </v-col>
-        <v-col
-          cols="12"
-          md="4"
-        >
-          <v-text-field
-            v-model="curso.fecha_final"
-            label="Fecha final"
-            required
-          ></v-text-field>
-        </v-col>
-                <v-col
-          cols="12"
-          md="4"
-        >
-
-          <v-text-field
-            v-model="curso.hora"
-            :rules="horaRules"
-            label="Hora"
-            required
-          ></v-text-field>
-        </v-col>
-                <v-col
-          cols="12"
-          md="4"
-        >
-          <v-text-field
-            v-model="curso.duracion"
-            :rules="duracionRules"
-            label="Duracion"
-            required
-          ></v-text-field>
-        </v-col>
-                <v-col
-          cols="12"
-          md="4"
-        >
-          <v-text-field
-            v-model="curso.precio"
-            :rules="precioRules"
-            label="Precio"
-            :hint="'Pesos'"
-            required
-          ></v-text-field>
-        </v-col>
-                <v-col
-          cols="12"
-          md="4"
-        >
-          <v-text-field
-            v-model="curso.cupoLimite"
-            :rules="cupolimiteRules"
-            label="Cupo limite"
-            required
-          ></v-text-field>
-        </v-col>
-                <v-col
-          cols="12"
-          md="4"
-        >
-          <v-text-field
+            required>
+            </v-text-field>
+            <v-layout>
+              <v-flex class="mb-4">
+                <v-text-field
+                v-model="curso.fecha_inicio"
+                label="Fecha de inicio"
+                required>
+                </v-text-field>
+              </v-flex>
+              <v-flex class="mb-1"></v-flex>
+              <v-flex class="mb-4">
+                <v-text-field
+                v-model="curso.fecha_final"
+                label="Fecha final"
+                required>
+                </v-text-field>
+              </v-flex>
+            </v-layout>
+            <v-layout>
+              <v-flex class="mb-4">
+                <v-text-field
+                v-model="curso.hora"
+                :rules="horaRules"
+                label="Hora"
+                required>
+                </v-text-field>
+              </v-flex>
+              <v-flex class="mb-1"></v-flex>
+              <v-flex class="mb-4">
+                <v-text-field
+                v-model="curso.duracion"
+                :rules="duracionRules"
+                label="Duracion"
+                required>
+                </v-text-field>
+              </v-flex>
+              <v-flex class="mb-1"></v-flex>
+              <v-flex class="mb-4">
+                <v-text-field
+                v-model="curso.precio"
+                :rules="precioRules"
+                label="Precio"
+                :hint="'Pesos'"
+                required>
+                </v-text-field>
+              </v-flex>
+            </v-layout>
+            <v-layout>
+              <v-flex class="mb-4">
+                <v-text-field
+                v-model="curso.cupoLimite"
+                :rules="cupolimiteRules"
+                label="Cupo limite"
+                required>
+                </v-text-field>
+              </v-flex>
+              <v-flex class="mb-1"></v-flex>
+              <v-flex class="mb-4">
+                <v-autocomplete
+                :items="status"
+                item-text="id"
+                v-model="curso.status"
+                label="Estatus">
+                </v-autocomplete>
+              </v-flex>
+            </v-layout>
+            <v-text-field
             v-model="curso.descripcion"
             :rules="descripcionRules"
             label="Descripción"
-            required
-          ></v-text-field>
-        </v-col>
-                <v-col
-          cols="12"
-          md="4"
-        >
-          <v-text-field
+            required>
+            </v-text-field>
+            <v-text-field
             v-model="curso.requisitos"
             label="Requisitos"
-            required
-          ></v-text-field>
-        </v-col>
-
-        <v-layout>
-          <v-flex class="mb-6">
-            <v-autocomplete
-            :items="status"
-            color="white"
-            item-text="id"
-            v-model="curso.status"
-            label="Estatus">
-            </v-autocomplete>
-          </v-flex>
-          <v-flex class="mb-3"></v-flex>
-          <v-flex class="mb-6"></v-flex>
-        </v-layout>
-
-      </v-row>
-    <div class="ma-3">
-      <v-btn
-      :disabled="!valid"
-      color="success"
-      class="mr-4"
-      type="submit">
-        Modificar
-      </v-btn>
-    </div>
-    <div class="ma-3">
-        <h2>Sus datos actuales</h2>
-        <h3>Nombre: {{ currentCurso.nombre }}</h3>
-        <h3>Correo: {{ currentCurso.descripcion }}</h3>
-        <h3>ID: {{ currentCurso._id }}</h3>
-    </div>
-    </v-container>
-        <v-snackbar v-model="snackbar">
-      <!--{{ message.message }}--> Docente modificado correctamente
-      <v-btn color="blue" text @click="snackbar=false">cerrar</v-btn>
-    </v-snackbar>
-  </v-form>
+            required>
+            </v-text-field>
+          </v-card-text>
+          <v-divider></v-divider>
+          <v-card-actions class="ma-2">
+            <v-btn :disabled="!valid" color="success" class="mr-4" type="submit">Modificar</v-btn>
+          </v-card-actions>
+          <v-snackbar v-model="snackbar">
+            Curso actualizado correctamente
+            <v-btn color="blue" text @click="snackbar=false">cerrar</v-btn>
+          </v-snackbar>
+          </v-card>
+        </v-form>
+      </v-flex>
+      <v-flex class="my-12 mx-12">
+        <v-card xs12 sm8 md6 class="mb-8" max-width="594" outlined>
+          <v-toolbar flat color="grey darken-4">
+            <v-toolbar-title class="font-weight-light white--text ml-10">Datos actuales del curso</v-toolbar-title>
+            <v-spacer></v-spacer>
+          </v-toolbar>
+          <v-list-item three-line>
+            <v-list-item-content>
+              <v-list-item-title class="font-weight-light mb-4">Docente {{currentCurso.docente._id}}</v-list-item-title>
+              <v-list-item-title class="headline mb-1">Curso {{currentCurso.nombre}}</v-list-item-title>
+              <v-list-item-title class="font-weight-light mb-4">ID {{currentCurso._id}}</v-list-item-title>
+              <v-list-item-title class="font-weight-light">Fecha inicio {{currentCurso.fecha_inicio}}</v-list-item-title>
+              <v-list-item-title class="font-weight-light mb-4">Fecha final {{currentCurso.fecha_final}}</v-list-item-title>
+              <v-list-item-title class="font-weight-light">Hora {{currentCurso.hora}}</v-list-item-title>
+              <v-list-item-title class="font-weight-light">Duración {{currentCurso.duracion}} horas</v-list-item-title>
+              <v-list-item-title class="font-weight-light">Precio ${{currentCurso.precio}}</v-list-item-title>
+              <v-list-item-title class="font-weight-light mb-4">Cupo límite {{currentCurso.cupoLimite}}</v-list-item-title>
+              <v-list-item-title class="font-weight-light">Descripción {{currentCurso.descripcion}}</v-list-item-title>
+              <v-list-item-title class="font-weight-light">Requisitos {{currentCurso.requisitos}}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-card>
+      </v-flex>
+    </v-layout>
+  </v-app>
 </template>
 
 <script>
@@ -164,7 +154,7 @@ export default {
         ],
         nombreRules: [
         v => !!v || 'Nombre es requerido',
-        v => (v && v.length <= 25) || 'Name must be less than 25 characters',
+        v => (v && v.length <= 35) || 'Name must be less than 35 characters',
         ],
         horaRules: [
           v => !!v || 'Hora es requerida',
@@ -198,11 +188,14 @@ export default {
         }
     },
     methods: {
+      validate () {
+        this.$refs.form.validate()
+      },
       modificarCurso(id) {
         cursosService.actualizarCurso(this.curso, id).then(data => {
-            this.snackbar = true;
             localStorage.removeItem('curso');
-            this.$router.push('/MisCursos');
+            //this.$router.push('/MisCursos');
+            this.snackbar = true;
         })
       }
     }
