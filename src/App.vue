@@ -10,6 +10,7 @@
       <v-btn rounded to="/Profile" v-if="currentUser">Perfil</v-btn>
       <v-btn rounded to="/ProfileEst" v-if="currentUserEst">Perfil</v-btn>
       <v-btn rounded to="/CrearDocente" v-if="currentUser && currentUser.rol == 'ADMIN_ROLE'">Crear docente</v-btn>
+      <v-btn rounded to="/Docentes" v-if="currentUser && currentUser.rol == 'ADMIN_ROLE'">Docentes</v-btn>
       <v-btn rounded v-if="currentUser" @click.prevent="logOut">Cerrar sesión</v-btn>
       <v-btn rounded v-if="currentUserEst" @click.prevent="logOutEst">Cerrar sesión</v-btn>
        <v-spacer></v-spacer>
