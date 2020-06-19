@@ -122,6 +122,24 @@ const routes = [{
         name: 'Estudiante',
         component: () =>
             import ('../views/Estudiante.vue')
+    },
+    {
+        path: '/VerEtiquetas',
+        name: 'VerEtiquetas',
+        component: () =>
+            import ('../views/VerEtiquetas.vue')
+    },
+    {
+        path: '/Empleo',
+        name: 'Empleo',
+        component: () =>
+            import ('../views/Empleo.vue')
+    },
+    {
+        path: '/Fotos',
+        name: 'Fotos',
+        component: () =>
+            import ('../views/Fotos.vue')
     }
 
 ]
