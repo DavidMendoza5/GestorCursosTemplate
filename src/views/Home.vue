@@ -108,7 +108,7 @@
                 <v-img
                   height="200"
                   width="200"
-                  src="https://www.tecnosise.com/docente/images/docentes.png">
+                  src="https://www.icdlcolombia.org/wp-content/uploads/2018/11/seo-data-big-data-analytics-site-database-1443941-pxhere.com_.jpg">
                 </v-img>
               </v-col>
               <v-col cols="auto" class="text-center">
