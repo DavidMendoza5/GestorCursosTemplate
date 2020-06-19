@@ -43,7 +43,7 @@
             <v-container>
               <v-btn text href="#" to="/About" class="secondary--text font-weight-light">¿Quiénes somos?</v-btn>
               <v-flex>
-                <a href="#" class="secondary--text font-weight-light">Empleo</a>
+                <v-btn text href="#" to="/Empleo" class="secondary--text font-weight-light">Empleo</v-btn>
               </v-flex>
             </v-container>
           </v-flex>
@@ -51,7 +51,7 @@
             <v-container>
               <v-btn text href="#" to="/GoogleMapLoader" class="secondary--text font-weight-light">Mapa del sitio</v-btn>
               <v-flex>
-                <a href="#" class="secondary--text font-weight-light">Cursos destacados</a>
+                <v-btn text href="#" to="/Fotos" class="secondary--text font-weight-light">Fotos de nuestros cursos</v-btn>
               </v-flex>
             </v-container>
           </v-flex>

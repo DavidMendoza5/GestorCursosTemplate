@@ -32,6 +32,7 @@
             <v-card-actions>
                 <v-btn text color="teal" to="/ModificarInfo" class="mx-2">Modificar datos</v-btn>
                 <v-btn text color="teal" to="/CrearCurso">Crear curso</v-btn>
+                <v-btn text color="teal" to="/VerEtiquetas" class="mx-2">Ver etiquetas</v-btn> 
                 <v-spacer></v-spacer>
             </v-card-actions>
         </v-card>
