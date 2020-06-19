@@ -1,5 +1,15 @@
 <template>
     <v-app>
+        <v-banner>
+            <v-layout column align-center class="pa-8">
+                <v-form v-model="valid">
+                    <v-card width="700" flat> <!--Elimina la elevación-->
+                        <v-text-field v-model="idEstudiante" :rules="idRules" :counter="24" placeholder="Buscar" outlined rounded></v-text-field>
+                    </v-card>
+                    <v-btn class="mx-3" color="red" :disabled="!valid" @click="eliminarEstudiante(idEstudiante)" large>Eliminar</v-btn>
+                </v-form>
+            </v-layout>
+        </v-banner>
     <v-row>
         <v-col cols="12" sm="6" offset-sm="3">
             <div>
