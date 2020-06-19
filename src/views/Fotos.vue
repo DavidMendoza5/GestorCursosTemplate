@@ -1,10 +1,29 @@
 <template>
-     <v-parallax
-    dark
-    src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"
-    height="1080" width="1920"
-  >
-   <v-card width="400" class="mx-auto mt-5">
+     <v-app>
+
+     <v-banner color="teal">
+    <v-layout>
+    <v-flex class="mb-4">
+      <v-card width="400" class="mx-auto mt-5" color="teal" flat>
+        <v-img class="mx-10" height="100" width="150" src="../assets/logo.jpg"></v-img>
+      </v-card>
+    </v-flex>
+
+    <v-flex class="mx-10 ">
+      <v-card width="980" class="mx-auto mt-5" flat color="teal">
+        <v-list-item>
+          <v-list-item-content>
+            <v-list-item-title class="headline"><h1>HuasTecnology</h1></v-list-item-title>
+            <v-list-item-title class="headline mb-4"><h3>Nuestras fotos</h3></v-list-item-title>
+            <v-list-item-subtitle>by HuasTechnology</v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+      </v-card>
+    </v-flex>
+    </v-layout>
+  </v-banner>
+     <!--
+       <v-card width="400" class="mx-auto mt-5">
         <v-img
           height="300"
           width="400" 
@@ -12,6 +31,7 @@
     </v-img>
   </v-card>
       <v-spacer></v-spacer>
+     -->
     <v-container>
       <v-carousel>
         <v-carousel-item
@@ -22,7 +42,7 @@
       </v-carousel>
     </v-container>
     <v-spacer></v-spacer>
-  </v-parallax>
+  </v-app>
 </template>
 
 <script>
