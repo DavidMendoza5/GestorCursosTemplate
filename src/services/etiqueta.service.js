@@ -18,6 +18,12 @@ class EtiquetaService {
         };
         return axios.get(url + 'obtenerEtiquetas/' +  referenciaId, config)
     }
+    eliminarEtiqueta(referenciaId, nombre) {
+        var config = {
+            headers: { 'Authorization': localStorage.getItem('token') }
+        };
+        return axios.delete(url + 'eliminarEtiqueta/' + referenciaId + '/' + nombre, config)
+    }
 }
 
 export default new EtiquetaService();
