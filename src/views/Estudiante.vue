@@ -12,6 +12,9 @@
             <v-snackbar v-model="snackbar" :timeout="3000" absolute bottom color="dark">
                 ¡Estudiante eliminado con éxito!
             </v-snackbar>
+            <v-snackbar v-model="messageError" :timeout="3000" absolute bottom color="dark">
+                Error al eliminar el estudiante
+            </v-snackbar>
         </v-banner>
     </v-app>
 </template>
@@ -23,6 +26,7 @@ import EstudianteService from '../services/estudiante.service.js'
             return {
                 valid: false,
                 snackbar: false,
+                messageError: false,
                 idEstudiante:'',
                 idRules: [
                     v => !!v || 'ID es requerido',
@@ -42,8 +46,12 @@ import EstudianteService from '../services/estudiante.service.js'
         },
         methods: {
             eliminarEstudiante(id) {
-                EstudianteService.eliminarEstudiante(id)
-                this.snackbar = true;
+                EstudianteService.eliminarEstudiante(id).then(response => {
+                    this.snackbar = true;
+                },
+                err => {
+                    this.messageError = true;
+                })
             }    
         }
     }    

@@ -5,9 +5,10 @@
         <v-card-title>Id: {{currentUser.id}}</v-card-title>
         <v-card-title v-if="currentUser.rol=='ADMIN_ROLE'">Rol: {{currentUser.rol}}</v-card-title>
         <v-row>
-            <v-col> 
-                <v-btn to="/ModificarInfo" color="success" class="mx-2">Modificar datos</v-btn>        
-                <v-btn v-if="currentUser.rol !='ADMIN_ROLE' " to="/VerEtiquetas" color="success" class="mx-2">Ver etiquetas</v-btn> 
+            <v-col>
+                <v-btn to="/ModificarInfo" color="success" class="mx-2">Modificar datos</v-btn> 
+                <v-btn color="success" to="/CrearCurso">Crear curso</v-btn>
+                <v-btn to="/VerEtiquetas" color="success" class="mx-2">Ver etiquetas</v-btn>      
             </v-col>
         </v-row>
     </v-card>

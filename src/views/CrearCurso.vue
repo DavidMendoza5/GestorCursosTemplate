@@ -141,6 +141,15 @@
       color="dark">
       Se ha añadido un nuevo curso
     </v-snackbar>
+      <v-snackbar
+      v-model="messageError"
+      :timeout="3000"
+      absolute
+      bottom
+      left
+      color="dark">
+      Error al añadir el curso
+    </v-snackbar>
   </v-card>
   </v-form>
   </v-flex>
@@ -155,6 +164,7 @@
         valid: true,
         snackbar: false,
         message:'',
+        messageError: false,
         model: null,
         status: [
           { id: 1 },
@@ -201,6 +211,8 @@
         this.$refs.form.validate()
       },
       crearCurso(){
+        const user = JSON.parse(localStorage.getItem('user'))
+        if(user.id == this.curso.docente){
             this.$store.dispatch('auth/crearCurso', this.curso).then(
             data => {
               this.successful = true;
@@ -212,8 +224,14 @@
                 error.message ||
                 error.toString()
               )
+              this.messageError = true;
+              this.snackbar = false;
               this.successful = false;
             })
+        } else {
+            this.messageError = true;
+            this.snackbar = false;
+        }
       }
     }
   }

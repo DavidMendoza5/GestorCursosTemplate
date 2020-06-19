@@ -41,6 +41,10 @@
                         {{message}}
                         <v-btn color="blue" text @click="snackbar=false">cerrar</v-btn>
                     </v-snackbar>
+                    <v-snackbar v-model="messageError">
+                        Error al crear la etiqueta
+                        <v-btn color="blue" text @click="messageError=false">cerrar</v-btn>
+                    </v-snackbar>
                 </v-card>
             </v-form>
         </v-flex>
@@ -54,6 +58,7 @@
         data () {
             return {
                 valid: true,
+                messageError: false,
                 snackbar: false,
                 message:'',
                 etiquetaRules:[
@@ -84,6 +89,8 @@
                     if (data != null){
                         this.message = data.data.message;
                         this.snackbar = true;
+                    } else {
+                        this.messageError = true;
                     }
                 },
                 error => {
@@ -91,6 +98,7 @@
                     (error.response && error.response.data) ||
                     error.message ||
                     error.toString())
+                    this.messageError = true;
                 })
             }
         }

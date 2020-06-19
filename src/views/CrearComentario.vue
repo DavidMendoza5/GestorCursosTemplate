@@ -57,6 +57,15 @@
                         color="dark">
                         Se ha añadido un nuevo comentario
                         </v-snackbar>
+                        <v-snackbar
+                        v-model="messageError"
+                        :timeout="2000"
+                        absolute
+                        bottom
+                        right
+                        color="dark">
+                        Error al añadir un comentario
+                        </v-snackbar>
                     </v-card>
                 </v-form>    
             </v-flex>
@@ -77,7 +86,8 @@ import ComentarioService from '../services/comentario.service.js' //Con axios
                     {name: 'Docente'},
                     {name: 'Curso'}
                 ],
-                comentario: {descripcion:'', tipo:'', calificacion:''}
+                comentario: {descripcion:'', tipo:'', calificacion:''},
+                messageError: false
             }
         },
         methods: {
@@ -87,10 +97,12 @@ import ComentarioService from '../services/comentario.service.js' //Con axios
                         this.snackbar = true;
                     },
                     error => {
-                    console.log(
-                    (error.response && error.response.data) ||
-                    error.message ||
-                    error.toString())
+                        console.log(
+                        (error.response && error.response.data) ||
+                        error.message ||
+                        error.toString())
+                        this.snackbar = false;
+                        this.messageError=true;
                 })
                 console.log(this.comentario);
             }
