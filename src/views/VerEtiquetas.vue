@@ -21,8 +21,8 @@
          <!--Permite obtener los datos del curso-->
           <v-list-item three-line>
             <v-list-item-content>
-              <v-list-item-title class="font-weight-regular mb-4">Etiqueta {{etiqueta.etiqueta}}</v-list-item-title>
-              <v-list-item-title class="headline mb-1">Id {{etiqueta._id}}</v-list-item-title>
+              <v-list-item-title class="font-weight-regular mb-4">Etiqueta {{etiqueta.etiquetas[0].etiqueta}}</v-list-item-title>
+              <v-list-item-title class="headline mb-1">Id {{etiqueta.etiquetas[0]._id}}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         
