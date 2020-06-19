@@ -1,37 +1,36 @@
 <template>
     <v-app>
-    <v-row>
-        <v-col cols="12" sm="6" offset-sm="3">
-            <div>
-            <v-card>
+        <v-banner color="teal">
+            <v-row align="center" justify="center">
+                <v-col class="text-center">
+                    <h1 class="font-weight-light mx-auto">{{ currentUser.nombre }}, ingrese el ID del docente a encontrar</h1>
+                </v-col>
+            </v-row>
+        </v-banner>
+        <v-banner>
+            <v-layout column align-center class="pa-8">
                 <v-form name="form" @submit.prevent="search(idDocente)">
-                    <h2>Ingrese el id del docente que busca</h2>
-                    <v-text-field
-                    prepend-icon="mdi-magnify"
-                    v-model="idDocente"
-                    name="Docente_id"
-                    label="Id del docente"
-                    />             
-                    <v-card>
-                        <v-card-actions>
-                            <v-btn color="green" type="submit">Buscar docente</v-btn>
-                            <v-btn color="red" :disabled="!valid" @click="eliminarDocente()">Eliminar</v-btn>
-                        </v-card-actions>              
+                    <v-card width="700" flat> <!--Elimina la elevación-->
+                        <v-text-field v-model="idDocente" :rules="idRules" :counter="24" name="Docente_id" placeholder="Buscar" outlined rounded></v-text-field>
                     </v-card>
+                    <v-card-actions>
+                        <v-btn color="green" type="submit" large>Buscar docente</v-btn>
+                        <v-btn class="mx-3" color="red" :disabled="!valid" @click="eliminarDocente()" large>Eliminar</v-btn>
+                    </v-card-actions>
                     <v-snackbar v-model="snackbar">
-                        <!--{{ message.message }}--> Docente eliminado correctamente
+                        Docente eliminado correctamente
                         <v-btn color="blue" text @click="snackbar=false">cerrar</v-btn>
                     </v-snackbar>
                 </v-form>
-            </v-card>
-            </div>
-        </v-col>
-    </v-row>
-    <template v-if="buscar===false">
-    <v-row>
-        <v-col cols="12" sm="6" offset-sm="3">
-            <v-card>
-                <v-card-title>Docentes</v-card-title>
+            </v-layout>
+        </v-banner>
+
+        <template v-if="buscar===false">
+            <v-card max-width="644" class="mx-auto ma-10">
+                <v-toolbar flat color="grey darken-4">
+                    <v-toolbar-title class="font-weight-light white--text ml-6">Historial de docentes</v-toolbar-title>
+                    <v-spacer></v-spacer>
+                </v-toolbar>
                 <v-list-item v-for="(docente, index) in docentes" :key="index" link>
                     <v-list-item-content>
                         <v-list-item-title>Nombre: {{ docente.nombre}}</v-list-item-title>
@@ -39,26 +38,30 @@
                     </v-list-item-content>
                     <v-list-item-action>
                     <v-btn icon>
-                        <v-icon color="grey lighten-1">mdi-information</v-icon>
+                        <v-icon color="grey lighten-1">mdi-account</v-icon>
                     </v-btn>
                     </v-list-item-action>
                 </v-list-item>
             </v-card>
-        </v-col>
-    </v-row>
-    </template>
-    <template v-if="buscar===true">
-        <v-col cols="12" sm="6" offset-sm="3">
-            <v-card>
-                <v-card-title>Docente encontrado</v-card-title>
-                <h3> {{ docente[0]._id }} </h3>
-                <h3> {{ docente[0].nombre }} </h3>
-                <h3> {{ docente[0].correo }} </h3>
-                <!--<v-div v-for="">
-                </v-div>-->
+        </template>
+
+        <template v-if="buscar===true">
+            <v-card max-width="544" class="mx-auto ma-10">
+                <v-toolbar flat color="grey darken-4">
+                    <v-toolbar-title class="font-weight-light white--text ml-6">Docente encontrado</v-toolbar-title>
+                    <v-spacer></v-spacer>
+                </v-toolbar>
+                <v-card-text>
+                    <v-list-item>
+                        <v-list-item-content>
+                            <v-list-item-title class="font-weight-light mb-2">ID {{ docente[0]._id }}</v-list-item-title>
+                            <v-list-item-title class="font-weight-light mb-2">Nombre {{ docente[0].nombre }}</v-list-item-title>
+                            <v-list-item-title class="font-weight-light mb-2">Email {{ docente[0].correo }}</v-list-item-title>
+                        </v-list-item-content>
+                    </v-list-item>
+                </v-card-text>
             </v-card>
-        </v-col>
-    </template>
+        </template>
     </v-app>
 </template>
 

@@ -1,81 +1,60 @@
 
 <template>
-  <v-form 
-        ref="form"
-        v-model="valid"
-        :lazy-validation="lazy"
-        @submit.prevent="crearDocente">
-    <v-container>
-      <v-row>
-        <v-col
-          cols="12"
-          md="4"
-        >
-          <v-text-field
+  <v-app>
+
+    <v-form ref="form" v-model="valid" :lazy-validation="lazy" @submit.prevent="crearDocente">   
+      <v-container>
+        <v-card max-width="544" class="mx-auto ma-10">
+          <v-toolbar flat color="grey darken-4">
+            <v-toolbar-title class="font-weight-light white--text ml-6">Nuevo docente</v-toolbar-title>
+            <v-spacer></v-spacer>
+          </v-toolbar>
+          <v-card-text>
+            <v-text-field
             v-model="docente.nombre"
             :rules="nameRules"
             :counter="20"
             label="Nombre"
-            required
-          ></v-text-field>
-        </v-col>
-
-        <v-col
-          cols="12"
-          md="4"
-        >
-          <v-text-field
+            required>
+            </v-text-field>
+            <v-text-field
+            v-model="docente.correo"
+            :rules="emailRules"
+            label="E-mail"
+            required>
+            </v-text-field>
+            <v-text-field
             v-model="docente.password"
             :rules="nameRules"
             :counter="10"
             label="Contraseña"
-            required
-          ></v-text-field>
-        </v-col>
-
-        <v-col
-          cols="12"
-          md="4"
-        >
-          <v-text-field
-            v-model="docente.correo"
-            :rules="emailRules"
-            label="E-mail"
-            required
-          ></v-text-field>
-        </v-col>
-        <v-col
-          cols="12"
-          md="4"
-        >
-          <v-text-field
+            required>
+            </v-text-field>
+            <v-text-field
             v-model="docente.cargo"
             :rules="nameRules"
             label="Cargo"
-            required
-          ></v-text-field>
-        </v-col>
-      </v-row>
-          <div class="ma-3">
-      <v-btn
-      :disabled="!valid"
-      color="success"
-      class="mr-4"
-      type="submit"
-      >
-        Registrar
-      </v-btn>
-    </div>
-    </v-container>
-        <v-snackbar v-model="snackbar">
-      <!--{{ message.message }}--> Docente creado correctamente
-      <v-btn color="blue" text @click="snackbar=false">cerrar</v-btn>
-    </v-snackbar>
+            required>
+            </v-text-field>
+          </v-card-text>
+          <v-divider></v-divider>
+          <v-card-actions>
+            <v-btn :disabled="!valid" color="grey darken-4" class="mr-4 white--text" type="submit">
+              Registrar
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-container>
+      <v-snackbar v-model="snackbar">
+        Docente creado correctamente
+        <v-btn color="blue" text @click="snackbar=false">cerrar</v-btn>
+      </v-snackbar>
       <v-snackbar v-model="errorMessage">
         Error al crear docente
-      <v-btn color="blue" text @click="errorMessage=false">cerrar</v-btn>
-    </v-snackbar>
-  </v-form>
+        <v-btn color="blue" text @click="errorMessage=false">cerrar</v-btn>
+      </v-snackbar>
+    </v-form>
+  </v-app>
 </template>
 
   <script>
