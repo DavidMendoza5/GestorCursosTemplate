@@ -1,6 +1,6 @@
-<template>    
+<template> 
+  <v-app>   
     <v-col cols="12" sm="6" offset-sm="3">
-    <v-card>
         <v-form name="form" @submit.prevent="search(id)"> 
           <v-layout>
             <v-flex class="ma-1">
@@ -15,25 +15,24 @@
             </v-flex>
           </v-layout>
         </v-form>
-    </v-card>
-    <template v-if="buscar===true">
+    
+        <template v-if="buscar===true">
           <v-card class="mx-auto ma-8" max-width="494" outlined>
          <!--Permite obtener los datos del curso-->
           <v-list-item three-line>
             <v-list-item-content>
               <v-list-item-title class="font-weight-regular mb-4">Etiqueta {{etiqueta.etiquetas[0].etiqueta}}</v-list-item-title>
-              <v-list-item-title class="headline mb-1">Id {{etiqueta.etiquetas[0]._id}}</v-list-item-title>
+              <v-list-item-title class="headline mb-1">ID {{etiqueta.etiquetas[0]._id}}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-        
-      </v-card>  
-    </template>
-    </v-col>   
+          </v-card>  
+        </template>
+    </v-col> 
+  </v-app>   
 </template>
 
 
 <script>
-//import EtiquetaService from '../services/etiqueta.service'
 import etiquetaService from '../services/etiqueta.service'
 export default {
     data(){
@@ -51,7 +50,7 @@ export default {
            etiquetaService.getEtiqueta(id).then(Response=>{
           this.etiqueta = Response.data;
           console.log(this.etiqueta.etiquetas[0].etiqueta)
-    //  localStorage.setItem('etiqueta', JSON.stringify(this.cursos3[0]))
+        //  localStorage.setItem('etiqueta', JSON.stringify(this.cursos3[0]))
           this.valid = true;
           this.buscar =true;
         })
