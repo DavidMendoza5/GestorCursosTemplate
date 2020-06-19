@@ -16,7 +16,7 @@
           </v-layout>
         </v-form>
     </v-card>
-
+    <template v-if="buscar===true">
           <v-card class="mx-auto ma-8" max-width="494" outlined>
          <!--Permite obtener los datos del curso-->
           <v-list-item three-line>
@@ -27,21 +27,23 @@
           </v-list-item>
         
       </v-card>  
-
+    </template>
     </v-col>   
 </template>
 
 
 <script>
-import EtiquetaService from '../services/etiqueta.service'
+//import EtiquetaService from '../services/etiqueta.service'
 import etiquetaService from '../services/etiqueta.service'
 export default {
     data(){
         return{
             dialog: false,
             valid: false,
+            buscar: false,
             etiqueta:[],
-            etiqueta2:[]
+            etiqueta2:[],
+            id:''
         }
     },
     methods:{
