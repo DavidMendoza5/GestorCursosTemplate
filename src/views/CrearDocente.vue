@@ -30,12 +30,6 @@
             label="Contraseña"
             required>
             </v-text-field>
-            <v-text-field
-            v-model="docente.cargo"
-            :rules="nameRules"
-            label="Cargo"
-            required>
-            </v-text-field>
           </v-card-text>
           <v-divider></v-divider>
           <v-card-actions>
@@ -65,7 +59,7 @@
         errorMessage: false,
         nameRules: [
             v => !!v || 'Name is required',
-            v => v.length >= 3 || 'Name must be at least more than 3 characters',
+            v => (v && v.length >= 3) || 'Name must be at least more than 3 characters',
         ],
         email: '',
         emailRules: [
@@ -81,6 +75,7 @@
             console.log(this.docente)
             this.$store.dispatch('auth/register', this.docente).then(
             data => {
+              this.$refs.form.reset();
               this.snackbar = true;
             },
             error => {
