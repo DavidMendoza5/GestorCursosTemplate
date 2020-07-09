@@ -2,7 +2,7 @@
 <v-app>
     <v-layout column align-center class="pa-8">
         <v-flex xs12 sm8 md6>
-            <v-form v-model="valid" @submit.prevent="crearEtiqueta"> 
+            <v-form ref="form" v-model="valid" @submit.prevent="crearEtiqueta"> 
                 <v-card class="overflow-hidden ma-5" min-width="500">
                     <v-toolbar flat color="grey darken-4">
                         <v-toolbar-title class="font-weight-light ml-5 white--text">Register a tag</v-toolbar-title>
@@ -88,6 +88,7 @@
                 data => {
                     if (data != null){
                         this.message = data.data.message;
+                        this.$refs.form.reset()
                         this.snackbar = true;
                     } else {
                         this.messageError = true;
