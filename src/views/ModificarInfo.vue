@@ -100,6 +100,7 @@ export default {
     methods: {
       modificarDatos(id) {
         docenteService.update(this.docente, id).then(data => {
+            this.$refs.form.reset();
             this.snackbar = true;
         })
       }
