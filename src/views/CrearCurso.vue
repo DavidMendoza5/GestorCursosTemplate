@@ -1,14 +1,12 @@
 <template>
   <v-layout column align-center class="pa-8">
     <v-flex xs12 sm8 md6>
-      <v-form 
-      v-model="valid"
-      @submit.prevent="crearCurso">
+      
       <v-card
         class="overflow-hidden"
         color="blue-grey"
         dark
-        min-width="750">
+        min-width="950">
 
       <v-toolbar flat color="grey darken-4">
         <v-icon>mdi-account</v-icon>
@@ -17,20 +15,38 @@
       </v-toolbar>
 
       <v-card-text>
-        <v-text-field
-          color="white"
-          v-model="curso.nombre"
-          :rules="nombreRules"
-          :counter="25"
-          label="Nombre">
-        </v-text-field>
-
-        <v-text-field
-          color="white"
-          v-model="curso.docente"
-          :rules="docenteRules"
-          label="Docente ID">
-        </v-text-field>
+        <v-form ref="form" v-model="valid" @submit.prevent="crearCurso">
+      
+      
+        <v-layout>
+          <v-flex class="mb-6">
+            <v-text-field
+            color="white"
+            v-model="curso.nombre"
+            :rules="nombreRules"
+            :counter="25"
+            label="Nombre">
+            </v-text-field>
+          </v-flex>
+          <v-flex class="mb-1"></v-flex>
+          <v-flex class="mb-6">
+            <v-text-field
+            color="white"
+            v-model="curso.docente"
+            :rules="docenteRules"
+            label="Docente ID">
+            </v-text-field>
+          </v-flex>
+          <v-flex class="mb-1"></v-flex>
+          <v-flex class="mb-6">
+            <v-text-field
+            color="white"
+            v-model="curso.cupoLimite"
+            :rules="cupolimiteRules"
+            label="Cupo límite">
+            </v-text-field>
+          </v-flex>
+        </v-layout>
 
         <v-layout>
           <v-flex class="mb-6">
@@ -48,6 +64,16 @@
             label="Fecha final">
             </v-text-field>
           </v-flex>
+          <v-flex class="mb-1"></v-flex>
+          <v-flex class="mb-6">
+            <v-text-field
+            color="white"
+            v-model="curso.precio"
+            label="Precio"
+            :hint="'Pesos'">
+            </v-text-field>
+            </v-autocomplete>
+          </v-flex>
         </v-layout>
 
         <v-layout>
@@ -60,11 +86,7 @@
             label="Estatus">
             </v-autocomplete>
           </v-flex>
-          <v-flex class="mb-3"></v-flex>
-          <v-flex class="mb-6"></v-flex>
-        </v-layout>
-
-        <v-layout>
+          <v-flex class="mb-1"></v-flex>
           <v-flex class="mb-6">
             <v-text-field
             color="white"
@@ -86,26 +108,6 @@
           </v-flex>
         </v-layout>
 
-        <v-layout>
-          <v-flex class="mb-6">
-            <v-text-field
-            color="white"
-            v-model="curso.precio"
-            label="Precio"
-            :hint="'Pesos'">
-            </v-text-field>
-          </v-flex>
-          <v-flex class="mb-1"></v-flex>
-          <v-flex class="mb-6">
-            <v-text-field
-            color="white"
-            v-model="curso.cupoLimite"
-            :rules="cupolimiteRules"
-            label="Cupo límite">
-            </v-text-field>
-          </v-flex>
-        </v-layout>
-
         <v-text-field
           color="white"
           v-model="curso.descripcion"
@@ -118,26 +120,32 @@
           v-model="curso.requisitos"
           label="Requisitos">
         </v-text-field>
-
+        <v-divider></v-divider>
+        <div class="ma-3">
+        <v-spacer></v-spacer>
+          <v-btn
+            :disabled="!valid"
+            color="teal"
+            type="submit">
+            GUARDAR
+          </v-btn>
+          <v-btn
+          color="error"
+          class="mx-4"
+          @click="reset"
+          >
+            Reset Form
+          </v-btn>
+        </div>
+      </v-form>
       </v-card-text>
-    <v-divider></v-divider>
-
-    <v-card-actions class="pa-5">
-      <v-spacer></v-spacer>
-      <v-btn
-        :disabled="!valid"
-        color="teal"
-        type="submit">
-        GUARDAR
-      </v-btn>
-    </v-card-actions>
 
     <v-snackbar
       v-model="snackbar"
       :timeout="3000"
       absolute
       bottom
-      left
+      right
       color="dark">
       Se ha añadido un nuevo curso
     </v-snackbar>
@@ -146,12 +154,12 @@
       :timeout="3000"
       absolute
       bottom
-      left
+      right
       color="dark">
       Error al añadir el curso
     </v-snackbar>
   </v-card>
-  </v-form>
+  
   </v-flex>
   </v-layout>
 </template>
@@ -210,12 +218,16 @@
       validate () {
         this.$refs.form.validate()
       },
+      reset () {
+        this.$refs.form.reset()
+      },
       crearCurso(){
         const user = JSON.parse(localStorage.getItem('user'))
         if(user.id == this.curso.docente){
             this.$store.dispatch('auth/crearCurso', this.curso).then(
             data => {
               this.successful = true;
+              this.$refs.form.reset();
               this.snackbar = true;
             },
             error => {
