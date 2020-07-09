@@ -11,7 +11,7 @@
             <v-layout column align-center class="pa-8">
                 <v-form name="form" @submit.prevent="search(idDocente)">
                     <v-card width="700" flat> <!--Elimina la elevación-->
-                        <v-text-field v-model="idDocente" :rules="idRules" :counter="24" name="Docente_id" placeholder="Buscar" outlined rounded></v-text-field>
+                        <v-text-field v-model="idDocente" :counter="24" name="Docente_id" placeholder="Buscar" outlined rounded></v-text-field>
                     </v-card>
                     <v-card-actions>
                         <v-btn color="green" type="submit" large>Buscar docente</v-btn>
@@ -106,8 +106,8 @@ export default {
             const docente_eliminar = JSON.parse(localStorage.getItem('docente'));
             DocenteService.eliminarDocente(docente_eliminar._id).then(Response => {
                 localStorage.removeItem('docente');
-                this.snackbar = true;
                 this.idDocente = '';
+                this.snackbar = true;
             })
             this.buscar = false;
         }
