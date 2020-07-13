@@ -7,7 +7,7 @@ var config = {
 
 class EstudianteService {
     postEstudiante(estudiante) {
-        console.log(estudiante);
+        //console.log(estudiante);
         return axios.post(url + 'crearEstudiante', {
                 nombre: estudiante.nombre,
                 correo: estudiante.correo,
@@ -15,7 +15,7 @@ class EstudianteService {
                 cargo: estudiante.cargo,
                 telefono: estudiante.telefono,
                 conocimientos_previos: estudiante.conocimientos_previos,
-                curso: estudiante.curso
+                //curso: estudiante.curso
             }, config) //post Estudiante
     }
 
