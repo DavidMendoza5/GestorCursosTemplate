@@ -20,7 +20,7 @@
       v-model="estudiante.nombre"
       :counter="25"
       :rules="nameRules"
-      label="Nombre"
+      label="Nombre completo"
       required
     ></v-text-field>
 
@@ -99,14 +99,14 @@ import EstudianteService from '../services/estudiante.service'
       valid: true,
       nameRules: [
         v => !!v || 'Name is required',
-        v => (v && v.length <= 25) || 'Name must be less than 25 characters',
+        v => (v && v.length <= 25 && v.length > 10) || 'El nombre debe ser mayor a 10 caracteres y menor a 25',
       ],
       emailRules: [
-        v => !!v || 'E-mail is required',
+        v => !!v || 'Correo requerido',
         //v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
       ],
       passRules: [
-        v => !!v || 'Password is required',
+        v => !!v || 'Contraseña requerida',
       ],
       estudiante: { nombre:'', correo:'', password:'', cargo:'', telefono:'', conocimientos_previos:''} //,curso:''
     }),
