@@ -59,13 +59,13 @@
       v-model="estudiante.conocimientos_previos"
       label="Conocimientos previos"
     ></v-text-field>
-
+<!--
     <v-text-field
       prepend-icon="mdi-checkbox-marked-circle"
       v-model="estudiante.curso"
       label="ID_Curso"
     ></v-text-field>
-  
+-->  
     <div class="ma-3">
       <v-btn
       :disabled="!valid"
@@ -92,6 +92,7 @@
 </template>
 
 <script>
+import EstudianteService from '../services/estudiante.service'
   export default {
     name: "SignUp",
     data: () => ({
@@ -107,7 +108,7 @@
       passRules: [
         v => !!v || 'Password is required',
       ],
-      estudiante: { nombre:'', correo:'', password:'', cargo:'', telefono:'', conocimientos_previos:'',curso:''} //
+      estudiante: { nombre:'', correo:'', password:'', cargo:'', telefono:'', conocimientos_previos:''} //,curso:''
     }),
     methods: {
       validate () {
@@ -117,7 +118,7 @@
         this.$refs.form.reset()
       },
       postEstudiante() {
-        this.$store.dispatch('authEs/register', this.estudiante).then(
+        /*this.$store.dispatch('authEs/register', this.estudiante).then(
             data => {
               this.successful = true;
             },
@@ -129,7 +130,15 @@
               )
               this.successful = false;
             }
-      )}
+      )*/
+        console.log(this.estudiante);
+        EstudianteService.postEstudiante(this.estudiante).then(Response => {
+          console.log(Response.data);
+        }, err => {
+          console.log(err);
+          console.log(err.data);
+        })
+      }
     }
   }
 </script>
